@@ -1,0 +1,108 @@
+---
+import { siteConfig } from "../../config";
+import { works } from "../../portfolio";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const [main, ...others] = works;
+const summaries = [
+  "企业 AI 工作台、身份权限与运营服务",
+  "飞鹤 KOS · AI 内容生成与运营系统",
+  "节点图玩法开发，《暴走拖拉机》地图",
+];
+const kinds: Record<string, string> = {
+  "3D 内容工厂": "独立作品",
+  "CIP / Leadeep 企业 AI 工作台": "企业项目",
+  "大观 · 身份权限与运营服务": "企业项目",
+  "飞鹤 KOS · AI 内容生成与运营": "企业项目",
+  "订单可靠性实验": "学习项目",
+};
+---
+
+<section class="section" id="works">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">作品索引</p>
+      <h2 class="section-title">不想点地图的话，这里是文字版</h2>
+    </div>
+    <p style="max-width:34ch;font-size:13.5px;line-height:1.8;color:var(--paper-dim, #9aa89f);margin:0">
+      内容与图上一致。每个作品都按「问题 → 做法 → 结果」写，能点开的都给了链接。
+    </p>
+  </div>
+
+  <div class="index-grid">
+    <article class="work-card is-wide">
+      <div class="wide-inner">
+        <div style="display:flex;flex-direction:column;gap:12px;height:100%">
+          <span class="wno">{kinds[main.name] ?? ""}</span>
+          <h3>{main.name}</h3>
+          <p>{main.line}</p>
+          <div class="tags">
+            {main.tags.map((t) => <span class="tag">{t}</span>)}
+          </div>
+          <div class="links" style="margin-top:auto">
+            {
+              main.links?.map((l) => (
+                <a class="link" href={l.href} target="_blank" rel="noopener noreferrer">
+                  {l.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+        <div class="shots-2">
+          <a class="shot" href={main.links?.[0]?.href} target="_blank" rel="noopener noreferrer">
+            <img src={`${base}/shots/manual3d.webp`} alt="3D 装配说明书 Demo" loading="lazy" width="880" height="550" />
+          </a>
+          <a class="shot" href={main.links?.[1]?.href} target="_blank" rel="noopener noreferrer">
+            <img src={`${base}/shots/space3d.webp`} alt="360 全景看店 Demo" loading="lazy" width="880" height="550" />
+          </a>
+        </div>
+      </div>
+    </article>
+
+    {
+      others.map((w) => (
+        <article class="work-card">
+          <span class="wno">{kinds[w.name] ?? ""}</span>
+          <h3>{w.name}</h3>
+          <p>{w.line}</p>
+          <div class="tags">
+            {w.tags.slice(0, 4).map((t) => <span class="tag">{t}</span>)}
+          </div>
+          <div class="row">
+            <span style="font-size:12px;color:var(--paper-faint, #6d7a72)">{w.period ?? w.role ?? ""}</span>
+            <button class="link" type="button" data-zone="build" style="background:none;border:0;border-bottom:1px solid rgba(224,138,112,.35);padding:0 0 1px;cursor:pointer">
+              看问题与做法
+            </button>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<section class="section" id="experience" style="padding-top:0">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">经历</p>
+      <h2 class="section-title">三段经历，一条主线：把 AI 落成能用的产品</h2>
+    </div>
+    <button class="btn" type="button" data-zone="work">看完整经历</button>
+  </div>
+
+  <div style="display:grid;gap:0">
+    {
+      siteConfig.experience.map((job, i) => (
+        <button type="button" class="exp-row" data-zone="work">
+          <span>
+            <span class="exp-co">{job.company}</span>
+            <span class="exp-meta">
+              {job.title} · {summaries[i] ?? ""}
+            </span>
+          </span>
+          <span class="exp-time">{job.dateRange}</span>
+        </button>
+      ))
+    }
+  </div>
+</section>

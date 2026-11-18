@@ -12,7 +12,7 @@ export const siteConfig = {
   // 社交链接：有的填，没有的留空/删掉即可
   social: {
     email: "2693825087@qq.com",
-    github: "",
+    github: "https://github.com/pengyuyan3d",
     linkedin: "",
     twitter: "",
   },

@@ -1,0 +1,223 @@
+---
+import { siteConfig } from "../../config";
+import { campus, repos, signals, works, zones } from "../../portfolio";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const byId = (id: string) => zones.find((z) => z.id === id)!;
+const work = byId("work");
+const build = byId("build");
+const light = byId("campus");
+const camp = byId("camp");
+---
+
+<div class="scrim" data-close-panel aria-hidden="true"></div>
+
+<!-- 01 工作港 -->
+<section class="panel" id="panel-work" data-panel="work" role="dialog" aria-modal="true" aria-labelledby="panel-work-title" tabindex="-1">
+  <header class="panel-head">
+    <p class="panel-no">{work.no} · {work.en}</p>
+    <h2 class="panel-title" id="panel-work-title">{work.name}</h2>
+    <p class="panel-sub">{work.tagline}</p>
+    <button class="panel-close" type="button" data-close-panel aria-label="关闭">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+  </header>
+  <div class="panel-body">
+    <p class="panel-sub" style="margin:0 0 20px">
+      两段实习 + 一段正式，从 Go / Python 后端一路做到 Flutter 客户端接入。
+    </p>
+
+    {
+      siteConfig.experience.map((job, i) => (
+        <article class={`entry${i === 0 ? " is-hi" : ""}`}>
+          <div class="entry-top">
+            <div>
+              <h3 class="entry-title">{job.title}</h3>
+              <p class="entry-org">{job.company}</p>
+            </div>
+            <span class="entry-time">{job.dateRange}</span>
+          </div>
+          <ul class="entry-list">
+            {job.bullets.map((b) => <li>{b}</li>)}
+          </ul>
+        </article>
+      ))
+    }
+
+    <div class="tags" style="margin-top:18px">
+      {["Python / FastAPI", "Go / Gin", "Vue 3 / TS", "Flutter", "PostgreSQL", "Redis", "Docker / K8s"].map((t) => (
+        <span class="tag">{t}</span>
+      ))}
+    </div>
+    <p class="note">
+      经历与简历原文一致，没有放大年限：实际是 2026 届 + 约 7 个月实习/正式。企业项目无公网 Demo，面试时可展开到具体接口、故障复现步骤与测试。
+    </p>
+  </div>
+</section>
+
+<!-- 02 项目工坊 -->
+<section class="panel" id="panel-build" data-panel="build" role="dialog" aria-modal="true" aria-labelledby="panel-build-title" tabindex="-1">
+  <header class="panel-head">
+    <p class="panel-no">{build.no} · {build.en}</p>
+    <h2 class="panel-title" id="panel-build-title">{build.name}</h2>
+    <p class="panel-sub">{build.tagline}</p>
+    <button class="panel-close" type="button" data-close-panel aria-label="关闭">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+  </header>
+  <div class="panel-body">
+    <p class="panel-sub" style="margin:0 0 18px">
+      每个作品按「问题 → 做法 → 结果」写，能点开的都放了链接。
+    </p>
+
+    {
+      works.map((w) => (
+        <article class="case">
+          {w.cover && (
+            <div class="case-cover">
+              <img src={`${base}/${w.cover.src}`} alt={w.cover.alt} loading="lazy" width="880" height="550" />
+            </div>
+          )}
+          <h3>{w.name}</h3>
+          <p class="case-line">{w.line}</p>
+
+          <div class="case-block">
+            <h4>问题</h4>
+            <p>{w.problem}</p>
+          </div>
+          <div class="case-block">
+            <h4>做法</h4>
+            <ul>
+              {w.approach.map((a) => <li>{a}</li>)}
+            </ul>
+          </div>
+          <div class="case-block">
+            <h4>结果</h4>
+            <p>{w.result}</p>
+          </div>
+
+          <div class="tags">
+            {w.tags.map((t) => <span class="tag">{t}</span>)}
+          </div>
+
+          {w.links && (
+            <div class="links">
+              {w.links.map((l) => (
+                <a class="link" href={l.href} target="_blank" rel="noopener noreferrer">
+                  {l.label}
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M14 4h6v6M20 4 10 14M18 14v6H4V6h6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          )}
+
+          {w.note && <p class="note">{w.note}</p>}
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<!-- 03 校园灯塔 -->
+<section class="panel" id="panel-campus" data-panel="campus" role="dialog" aria-modal="true" aria-labelledby="panel-campus-title" tabindex="-1">
+  <header class="panel-head">
+    <p class="panel-no">{light.no} · {light.en}</p>
+    <h2 class="panel-title" id="panel-campus-title">{light.name}</h2>
+    <p class="panel-sub">{light.tagline}</p>
+    <button class="panel-close" type="button" data-close-panel aria-label="关闭">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+  </header>
+  <div class="panel-body">
+    <div class="entry is-hi">
+      <div class="entry-top">
+        <div>
+          <h3 class="entry-title">{campus.major}</h3>
+          <p class="entry-org">{campus.school}</p>
+        </div>
+        <span class="entry-time">{campus.period}</span>
+      </div>
+    </div>
+
+    <div class="facts" style="margin-top:6px">
+      {
+        campus.facts.map((f) => (
+          <div class="fact">
+            <b>{f.k}</b>
+            <span>{f.v}</span>
+            <i>{f.d}</i>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="case-block" style="margin-top:22px">
+      <h4>这盏灯现在照在哪</h4>
+      <p style="font-size:14px;line-height:1.9;color:var(--color-muted)">
+        {campus.story}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 内容营地 -->
+<section class="panel" id="panel-camp" data-panel="camp" role="dialog" aria-modal="true" aria-labelledby="panel-camp-title" tabindex="-1">
+  <header class="panel-head">
+    <p class="panel-no">{camp.no} · {camp.en}</p>
+    <h2 class="panel-title" id="panel-camp-title">{camp.name}</h2>
+    <p class="panel-sub">{camp.tagline}</p>
+    <button class="panel-close" type="button" data-close-panel aria-label="关闭">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+  </header>
+  <div class="panel-body">
+    <div class="entry is-hi" style="padding-bottom:18px">
+      <div class="entry-top">
+        <div>
+          <h3 class="entry-title">现在：2026 届，可立即到岗</h3>
+          <p class="entry-org">只投北京 · 求职方向：AI 应用 / Python 后端 / 全栈</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:8px">
+      {
+        signals.map((s) => (
+          <a class="signal" href={s.href} target="_blank" rel="noopener noreferrer">
+            <span class="signal-k">{s.label}</span>
+            <span class="signal-v">{s.value}</span>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="case-block" style="margin-top:26px">
+      <h4>能翻的仓库</h4>
+      <div style="display:grid;gap:10px">
+        {
+          repos.map((r) => (
+            <a class="fact" href={r.href} target="_blank" rel="noopener noreferrer" style="display:block">
+              <span style="font-weight:700;font-size:14px">{r.name}</span>
+              <p style="margin:6px 0 0;font-size:12.5px;line-height:1.7;color:var(--color-muted)">{r.desc}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="links" style="margin-top:26px">
+      <a class="btn btn-primary" href={`${base}/resume.pdf`} download>下载一页 PDF</a>
+      <a class="btn" href={`${base}/profile/`}>看长版简历</a>
+    </div>
+  </div>
+</section>

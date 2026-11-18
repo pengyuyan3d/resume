@@ -1,0 +1,69 @@
+﻿---
+import { siteConfig } from "../../config";
+import { zones } from "../../portfolio";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<section class="stage" id="island">
+  <div class="stage-inner">
+    <div class="stage-copy">
+      <h1 class="stage-title">雨岛</h1>
+
+      <p class="stage-lede">四座基点，放我做过的项目。</p>
+      <p class="stage-desc">
+        2026 届，在北京找 AI 应用 / Python 后端的工作，随时到岗。
+        点开地图上的名字，看每个项目的问题、做法和结果。
+      </p>
+
+      <div class="stage-actions">
+        <button class="btn btn-primary" type="button" data-zone="work">打开工作港</button>
+        <a class="btn btn-ghost" href={`${base}/resume.pdf`} download>下载简历 PDF</a>
+      </div>
+    </div>
+
+    <figure class="plate">
+      <div class="plate-frame">
+        <img
+          src={`${base}/island.svg`}
+          width="1200"
+          height="780"
+          alt="雨岛地图：工作港、项目工坊、校园灯塔、内容营地四座基点"
+          fetchpriority="high"
+        />
+        {
+          zones.map((z) => (
+            <button
+              class="marker"
+              type="button"
+              data-zone={z.id}
+              data-place={z.place}
+              style={`left:${z.x}%;top:${z.y}%`}
+              aria-controls={`panel-${z.id}`}
+              aria-expanded="false"
+            >
+              <span class="marker-dot" aria-hidden="true"><i>{z.name}</i></span>
+              <span class="marker-label">{z.name}</span>
+            </button>
+          ))
+        }
+      </div>
+      <figcaption class="plate-caption">
+        <span>雨岛 · 四座基点</span>
+        <span>39.9°N 116.4°E</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <nav class="index-bar" aria-label="基点导航">
+    {
+      zones.map((z) => (
+        <button class="index-item" type="button" data-zone={z.id} aria-controls={`panel-${z.id}`} aria-expanded="false">
+          <span class="index-name">{z.name}</span>
+          <span class="index-hint">{z.short}</span>
+        </button>
+      ))
+    }
+    <a class="index-cta" href={`${base}/resume.pdf`} download>下载简历 PDF</a>
+  </nav>
+</section>

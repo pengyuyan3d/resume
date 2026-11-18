@@ -1,93 +1,219 @@
----
-import Header from "../components/Header.astro";
-import Hero from "../components/Hero.astro";
-import About from "../components/About.astro";
-import Projects from "../components/Projects.astro";
-import Experience from "../components/Experience.astro";
-import Education from "../components/Education.astro";
-import Contact from "../components/Contact.astro";
-import Footer from "../components/Footer.astro";
+﻿---
+import Stage from "../components/island/Stage.astro";
+import Panels from "../components/island/Panels.astro";
+import IndexSection from "../components/island/IndexSection.astro";
 import { siteConfig } from "../config";
 import "../styles/global.css";
+import "../styles/island.css";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const ogImage = `${base}/portrait.jpg`;
+const title = `${siteConfig.name} · 雨岛 | 作品集`;
+const desc =
+  "张雨的作品集：一座可以点开的岛。三段企业 AI 交付、五个作品、校园与联系方式，每个项目按「问题 → 做法 → 结果」写清楚。";
 ---
 
-<html lang="zh-CN" class="scroll-smooth">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{siteConfig.name} · {siteConfig.title}</title>
-    <meta name="description" content={siteConfig.description} />
-    <meta name="theme-color" content="#07080b" />
+    <title>{title}</title>
+    <meta name="description" content={desc} />
+    <meta name="theme-color" content="#05070a" />
     <meta property="og:type" content="profile" />
-    <meta property="og:title" content={`${siteConfig.name} · ${siteConfig.title}`} />
-    <meta property="og:description" content={siteConfig.description} />
-    <meta property="og:image" content={ogImage} />
-    <link
-      rel="preload"
-      as="image"
-      href={`${base}/portrait.jpg`}
-      imagesrcset={`${base}/portrait-sm.jpg 480w, ${base}/portrait.jpg 900w`}
-      imagesizes="(min-width: 1024px) 460px, 90vw"
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:image" content={`${base}/portrait-hero.jpg`} />
+    <link rel="preload" as="image" href={`${base}/island.svg`} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: siteConfig.name,
+        jobTitle: "全栈开发工程师（AI 应用方向）",
+        email: `mailto:${siteConfig.social.email}`,
+        telephone: siteConfig.phone,
+        url: "https://pengyuyan3d.github.io/resume/",
+        address: { "@type": "PostalAddress", addressLocality: "北京", addressCountry: "CN" },
+        sameAs: ["https://github.com/pengyuyan3d"],
+        alumniOf: { "@type": "CollegeOrUniversity", name: "福建理工大学" },
+      })}
     />
   </head>
-  <body class="relative">
+  <body class="island-page">
     <div class="grain"></div>
-    <a
-      href="#about"
-      class="no-print sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-black"
-      >跳到正文</a
-    >
 
-    <Header />
+    <header class="site-top fixed inset-x-0 top-0 z-50" id="header">
+      <div class="mx-auto flex h-16 max-w-[1560px] items-center justify-between px-6 md:px-10">
+        <a href={`${base}/`} class="flex items-baseline gap-2.5">
+          <span class="text-[22px]" style="font-family:'Smiley Sans', var(--font-sans)">张雨</span>
+          <span class="text-[12px] text-[rgba(34,50,44,0.45)]">作品集</span>
+        </a>
+        <nav class="hidden items-center gap-8 text-[13px] text-[rgba(34,50,44,0.62)] md:flex">
+          <a class="nav-link hover:text-[#22322c]" href="#works">作品索引</a>
+          <a class="nav-link hover:text-[#22322c]" href="#experience">经历</a>
+          <a class="nav-link hover:text-[#22322c]" href={`${base}/profile/`}>长版简历</a>
+        </nav>
+        <a class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px;border-radius:2px" href={`${base}/resume.pdf`} download>
+          简历 PDF
+        </a>
+      </div>
+    </header>
 
     <main>
-      <Hero />
-      <About />
-      <Projects />
-      <Experience />
-      <Education />
-      <Contact />
+      <Stage />
+      <IndexSection />
+
+      <section class="section" id="contact" style="padding-top:0">
+        <div
+          class="card"
+          style="padding:clamp(26px,4vw,44px);display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:4px"
+        >
+          <div>
+            <p class="eyebrow">联系</p>
+            <h2 style="font-family:'Smiley Sans',var(--font-sans);font-size:clamp(24px,2.8vw,34px);font-weight:400;margin:10px 0 10px;letter-spacing:.01em">
+              在看机会，随时可以聊
+            </h2>
+            <p style="font-size:13.5px;line-height:1.8;color:rgba(34,50,44,.62);margin:0">
+              北京，2026 届，方向是 AI 应用 / Python 后端 / 全栈
+            </p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-primary" href={`mailto:${siteConfig.social.email}`}>发邮件</a>
+            <button class="btn" type="button" data-copy={siteConfig.social.email}>
+              复制邮箱
+            </button>
+            <a class="btn" href="https://github.com/pengyuyan3d" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <Footer />
+    <footer class="site-footer">
+      <span>© 2026 张雨 · 手绘海图 + Astro，无前端框架运行时</span>
+      <span style="display:flex;gap:16px">
+        <a href="https://github.com/pengyuyan3d/resume" target="_blank" rel="noopener noreferrer" class="hover:text-text">源码</a>
+        <a href={`${base}/resume/`} class="hover:text-text">打印版</a>
+      </span>
+    </footer>
 
+    <Panels />
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
     <script>
+      const body = document.body;
+      const panels = [...document.querySelectorAll<HTMLElement>(".panel")];
+      const triggers = [...document.querySelectorAll<HTMLElement>("[data-zone]")];
+      const scrim = document.querySelector<HTMLElement>(".scrim");
+      const order = ["work", "build", "campus", "camp"];
+      let lastFocus: HTMLElement | null = null;
+
+      const panelOf = (id: string) => panels.find((p) => p.dataset.panel === id) || null;
+
+      function openPanel(id: string, push = true) {
+        const panel = panelOf(id);
+        if (!panel) return;
+        lastFocus = document.activeElement as HTMLElement | null;
+        panels.forEach((p) => p.classList.toggle("is-open", p === panel));
+        body.classList.add("has-panel");
+        triggers.forEach((t) => t.setAttribute("aria-expanded", String(t.dataset.zone === id)));
+        const bodyEl = panel.querySelector<HTMLElement>(".panel-body");
+        if (bodyEl) bodyEl.scrollTop = 0;
+        window.setTimeout(() => panel.focus({ preventScroll: true }), 60);
+        if (push) {
+          const url = new URL(window.location.href);
+          url.searchParams.set("zone", id);
+          history.replaceState(null, "", url);
+        }
+      }
+
+      function closePanel() {
+        const open = panels.find((p) => p.classList.contains("is-open"));
+        if (!open) return;
+        open.classList.remove("is-open");
+        body.classList.remove("has-panel");
+        triggers.forEach((t) => t.setAttribute("aria-expanded", "false"));
+        const url = new URL(window.location.href);
+        url.searchParams.delete("zone");
+        history.replaceState(null, "", url);
+        lastFocus?.focus({ preventScroll: true });
+      }
+
+      triggers.forEach((t) => {
+        t.addEventListener("click", () => openPanel(t.dataset.zone as string));
+      });
+      document.querySelectorAll("[data-close-panel]").forEach((el) => {
+        el.addEventListener("click", closePanel);
+      });
+
+      document.addEventListener("keydown", (ev) => {
+        const isOpen = body.classList.contains("has-panel");
+        if (ev.key === "Escape" && isOpen) {
+          ev.preventDefault();
+          closePanel();
+          return;
+        }
+        if (isOpen && ev.key === "Tab") {
+          const panel = panels.find((p) => p.classList.contains("is-open"));
+          if (!panel) return;
+          const focusables = [
+            ...panel.querySelectorAll<HTMLElement>(
+              'button, a[href], input, [tabindex]:not([tabindex="-1"])',
+            ),
+          ].filter((el) => el.offsetParent !== null);
+          if (!focusables.length) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (!ev.shiftKey && document.activeElement === last) {
+            ev.preventDefault();
+            first.focus();
+          } else if (ev.shiftKey && document.activeElement === first) {
+            ev.preventDefault();
+            last.focus();
+          }
+          return;
+        }
+        if (isOpen) return;
+        const idx = Number(ev.key);
+        if (idx >= 1 && idx <= 4) openPanel(order[idx - 1]);
+      });
+
       // 顶栏滚动变实
       const header = document.getElementById("header");
-      const onScroll = () => {
-        if (!header) return;
-        header.classList.toggle("is-solid", window.scrollY > 16);
-      };
+      const onScroll = () => header?.classList.toggle("is-solid", window.scrollY > 16);
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
 
-      // 首屏照片视差（尊重 prefers-reduced-motion）
-      const heroMedia = document.querySelector(".hero-media img") as HTMLImageElement | null;
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (heroMedia && !reduceMotion) {
-        let raf = 0;
-        const parallax = () => {
-          raf = 0;
-          const y = window.scrollY;
-          heroMedia.style.transform = `translate3d(0, ${(y * 0.16).toFixed(1)}px, 0) scale(1.05)`;
-          heroMedia.style.opacity = String(Math.max(0, 1 - y / (window.innerHeight * 1.05)));
-        };
-        window.addEventListener(
-          "scroll",
-          () => {
-            if (!raf) raf = requestAnimationFrame(parallax);
-          },
-          { passive: true },
-        );
-        parallax();
-      }
+      // 深链：?zone=build
+      const zone = new URLSearchParams(window.location.search).get("zone");
+      if (zone && order.includes(zone)) openPanel(zone, false);
+
+      // 复制邮箱
+      const toast = document.getElementById("toast");
+      let timer: number | undefined;
+      document.querySelectorAll<HTMLElement>("[data-copy]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const text = btn.getAttribute("data-copy") || "";
+          try {
+            await navigator.clipboard.writeText(text);
+          } catch {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            ta.remove();
+          }
+          if (toast) {
+            toast.textContent = `已复制：${text}`;
+            toast.classList.add("show");
+            window.clearTimeout(timer);
+            timer = window.setTimeout(() => toast.classList.remove("show"), 1800);
+          }
+        });
+      });
 
       // 入场
       const revealEls = document.querySelectorAll(".reveal");
@@ -106,63 +232,6 @@ const ogImage = `${base}/portrait.jpg`;
       } else {
         revealEls.forEach((el) => el.classList.add("in"));
       }
-
-      // 导航高亮
-      const navLinks = [...document.querySelectorAll("[data-nav]")];
-      const sections = navLinks
-        .map((a) => document.querySelector(a.getAttribute("href") as string))
-        .filter(Boolean) as HTMLElement[];
-      const spy = () => {
-        const pos = window.scrollY + window.innerHeight * 0.35;
-        let current: HTMLElement | null = null;
-        sections.forEach((s) => {
-          if (s.offsetTop <= pos) current = s;
-        });
-        navLinks.forEach((a) => {
-          const active = current && a.getAttribute("href") === `#${current.id}`;
-          a.classList.toggle("text-text", !!active);
-          a.classList.toggle("text-muted", !active);
-        });
-      };
-      window.addEventListener("scroll", spy, { passive: true });
-      spy();
-
-      // 项目卡光标跟随
-      document.querySelectorAll("[data-spotlight]").forEach((card) => {
-        card.addEventListener("pointermove", (ev) => {
-          const e = ev as PointerEvent;
-          const r = (card as HTMLElement).getBoundingClientRect();
-          (card as HTMLElement).style.setProperty("--mx", `${e.clientX - r.left}px`);
-          (card as HTMLElement).style.setProperty("--my", `${e.clientY - r.top}px`);
-        });
-      });
-
-      // 复制邮箱
-      const toast = document.getElementById("toast");
-      let timer: number | undefined;
-      const showToast = (msg: string) => {
-        if (!toast) return;
-        toast.textContent = msg;
-        toast.classList.add("show");
-        window.clearTimeout(timer);
-        timer = window.setTimeout(() => toast.classList.remove("show"), 1800);
-      };
-      document.querySelectorAll("[data-copy]").forEach((btn) => {
-        btn.addEventListener("click", async () => {
-          const text = btn.getAttribute("data-copy") || "";
-          try {
-            await navigator.clipboard.writeText(text);
-          } catch {
-            const ta = document.createElement("textarea");
-            ta.value = text;
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand("copy");
-            ta.remove();
-          }
-          showToast(`已复制：${text}`);
-        });
-      });
     </script>
   </body>
 </html>
