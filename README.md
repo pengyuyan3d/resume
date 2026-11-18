@@ -2,8 +2,8 @@
 
 个人简历站：深色、照片首屏、克制动效。单页静态站点，另带一个 A4 一页版打印页面。
 
-- **在线地址**：<https://henanpengyuyan4444-beep.github.io/resume/>
-- **一页 PDF**：<https://henanpengyuyan4444-beep.github.io/resume/resume.pdf>
+- **在线地址**：<https://pengyuyan3d.github.io/resume/>
+- **一页 PDF**：<https://pengyuyan3d.github.io/resume/resume.pdf>
 
 ![首页](./preview-hero.png)
 
@@ -63,7 +63,7 @@ npm run preview
 项目站点发布在子路径 `/<仓库名>/`，所以 `astro.config.mjs` 里有：
 
 ```js
-site: "https://henanpengyuyan4444-beep.github.io",
+site: "https://pengyuyan3d.github.io",
 base: "/resume",
 ```
 
