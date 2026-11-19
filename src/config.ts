@@ -1,4 +1,4 @@
-export const siteConfig = {
+﻿export const siteConfig = {
   // 基本信息
   name: "张雨",
   title: "全栈开发工程师 · AI 应用方向",
@@ -56,11 +56,11 @@ export const siteConfig = {
       skills: ["Vue 3", "TypeScript", "FastAPI", "Redis", "Kubernetes"],
     },
     {
-      name: "《暴走拖拉机》游戏玩法",
+      name: "3D 内容工厂（独立作品）",
       description:
-        "用节点图开发地图玩法，主导核心机制实现与手感调优：拆出可复用的行为模块，按周活与留存反馈调参。",
-      link: "",
-      skills: ["节点图", "玩法设计", "数据调优"],
+        "把纸质说明书和门店全景编译成能点开的 3D 页面：说明书线按零件表生成 3D 装配步骤，店铺线用一张全景加热点；两条线共用一个引擎，产物是单文件静态页。线上有书柜与咖啡店两个 Demo。",
+      link: "https://pengyuyan3d.github.io/3d-content-kit/",
+      skills: ["Three.js", "编译式生成", "零后端", "全景热点"],
     },
   ],
 
