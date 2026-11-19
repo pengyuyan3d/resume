@@ -1,4 +1,4 @@
-﻿// 作品集（雨岛）的内容数据：只放事实，措辞与简历原文对齐。
+// 作品集（雨岛）的内容数据：只放事实，措辞与简历原文对齐。
 import { siteConfig } from "./config";
 
 export type ZoneId = "work" | "build" | "campus" | "camp";
@@ -35,8 +35,8 @@ export const zones: Zone[] = [
     no: "02",
     name: "项目工坊",
     en: "BUILD LAB",
-    tagline: "五个作品，都按问题 → 做法 → 结果写清楚",
-    short: "五个作品",
+    tagline: "七个作品，都按问题 → 做法 → 结果写清楚",
+    short: "七个作品",
     x: 62.1,
     y: 61.4,
     place: "right",
@@ -180,6 +180,55 @@ export const works: CaseItem[] = [
     links: [{ label: "源码", href: "https://github.com/pengyuyan3d/order-reliability-lab" }],
     note: "学习/实验项目，不是线上系统。",
   },
+  {
+    name: "3D 课本插图",
+    role: "独立作品 · 三个知识点，一个引擎",
+    line: "把课本里的一道题，编译成能转、能调、能一步步讲的 3D 课件。",
+    problem:
+      "课本是一张静态图，学生只能想象它转起来的样子；老师在黑板上画 3D 更难。要做的不是一段动画，而是把一道题拆成「能按步骤讲」的状态：每一步显示什么、哪个参数在变、公式读数跟着谁变。",
+    approach: [
+      "场景数据（题目、步骤、参数、讲解词）与播放器分开：加一个知识点只写一份 JSON + 一个场景模块",
+      "三个知识点：磁场中的带电粒子（v / θ / B 三个滑杆，实时算半径、周期、螺距）、单摆（摆长与 g 可调）、正方体截面（倾角 / 方位 / 位置，三角形到正六边形）",
+      "轨迹按解析解算，不做数值积分；参数、公式与 3D 画面同屏，讲的时候不用来回切",
+      "构建脚本把 three.js 与样式内联成一个 HTML，约 660KB，离线可开、投影仪直接放",
+    ],
+    result: "三个成品都是单文件、离线可开；加新知识点只需要一份场景 JSON 加一个场景模块，播放器不用动。",
+    tags: ["Three.js", "解析解", "单文件离线", "数据驱动"],
+    links: [
+      { label: "在线看", href: "https://pengyuyan3d.github.io/textbook3d/" },
+      { label: "磁场 Demo", href: "https://pengyuyan3d.github.io/textbook3d/demos/lorentz.html" },
+      { label: "源码", href: "https://github.com/pengyuyan3d/textbook3d" },
+    ],
+    cover: { src: "shots/physics3d.webp", alt: "带电粒子在磁场中的 3D 课件截图" },
+    note: "三个知识点，不是完整课程库；磁场是匀强场，没有边界场与相对论效应。",
+  },
+  {
+    name: "喵伴 MiaoBan",
+    role: "独立作品 · Windows 桌面应用",
+    line: "一只住在桌面上的像素猫：你打字它踩奶，打得太快会过热。",
+    problem:
+      "桌面宠物容易两头不讨好：要么吃内存、要么抢焦点——你正打着字，点一下猫就把输入打断了。目标是小到可以常驻、并且绝对不打扰。",
+    approach: [
+      "纯 C# + WinForms / GDI+，零第三方依赖，一个 exe 约 70KB",
+      "分层窗口 + 逐像素 alpha（UpdateLayeredWindow + DIB section），形状边缘没有白边",
+      "WM_MOUSEACTIVATE → MA_NOACTIVATE，点猫不抢输入焦点；键盘钩子被系统拦住时用活动检测兜底",
+      "32×36 像素画逐行定义剪影，白色描边由轮廓外扩生成；右键用原生 TrackPopupMenu",
+      "高 DPI（PerMonitorV2）、单实例、配置持久化；开机自启只写当前用户 Run 项，不动系统目录",
+    ],
+    result:
+      "一个可下载的 Windows 包：踩奶、过热、追鼠标、摸头、番茄钟、喝水与久坐提醒等十个动作，免安装、不联网。",
+    tags: ["C#", "Win32", "桌面应用", "像素画"],
+    links: [
+      { label: "在线页", href: "https://pengyuyan3d.github.io/miaoban/" },
+      {
+        label: "下载 exe",
+        href: "https://github.com/pengyuyan3d/miaoban/releases/latest/download/miaoban-v2-win64.zip",
+      },
+      { label: "源码", href: "https://github.com/pengyuyan3d/miaoban" },
+    ],
+    cover: { src: "shots/miaoban.webp", alt: "喵伴桌面像素猫截图" },
+    note: "只做了 Windows；暂时没有声音，自定义花纹也只做了一半。",
+  },
 ];
 
 /** 03 校园 */
@@ -209,6 +258,21 @@ export const repos = [
     name: "3d-content-kit",
     desc: "3D 内容工厂：说明书 3D 化 + 360 全景看店，两条产品线共用一套引擎",
     href: "https://github.com/pengyuyan3d/3d-content-kit",
+  },
+  {
+    name: "textbook3d",
+    desc: "3D 课本插图：磁场 / 单摆 / 正方体截面三个场景，一个引擎，单文件离线",
+    href: "https://github.com/pengyuyan3d/textbook3d",
+  },
+  {
+    name: "miaoban",
+    desc: "喵伴：Windows 桌面像素猫，纯 C# 单文件 exe，Release 可直接下载",
+    href: "https://github.com/pengyuyan3d/miaoban",
+  },
+  {
+    name: "fangcun",
+    desc: "方寸：38KB 单文件方块消除，零依赖，纯 Canvas + WebAudio",
+    href: "https://github.com/pengyuyan3d/fangcun",
   },
   {
     name: "order-reliability-lab",
