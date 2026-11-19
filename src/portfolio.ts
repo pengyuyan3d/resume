@@ -1,4 +1,4 @@
-// 作品集（雨岛）的内容数据：只放事实，措辞与简历原文对齐。
+﻿// 作品集（雨岛）的内容数据：只放事实，措辞与简历原文对齐。
 import { siteConfig } from "./config";
 
 export type ZoneId = "work" | "build" | "campus" | "camp";
@@ -249,7 +249,7 @@ export const campus = {
 export const signals = [
   { label: "GitHub", value: "github.com/pengyuyan3d", href: "https://github.com/pengyuyan3d" },
   { label: "邮箱", value: siteConfig.social.email, href: `mailto:${siteConfig.social.email}` },
-  { label: "电话", value: siteConfig.phone, href: `tel:${siteConfig.phone}` },
+  { label: "电话", value: siteConfig.phone.replace(/^(\d{3})(\d{4})(\d{4})$/, "$1 $2 $3"), href: `tel:${siteConfig.phone}` },
   { label: "本站源码", value: "github.com/pengyuyan3d/resume", href: "https://github.com/pengyuyan3d/resume" },
 ];
 
