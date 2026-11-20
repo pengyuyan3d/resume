@@ -65,6 +65,11 @@ const kinds: Record<string, string> = {
     {
       others.map((w) => (
         <article class="work-card">
+          {w.cover && (
+            <div class="card-cover">
+              <img src={`${base}/${w.cover.src}`} alt={w.cover.alt} loading="lazy" width="880" height="550" />
+            </div>
+          )}
           <span class="wno">{kinds[w.name] ?? ""}</span>
           <h3>{w.name}</h3>
           <p>{w.line}</p>

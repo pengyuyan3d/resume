@@ -78,6 +78,8 @@ export interface CaseItem {
   links?: { label: string; href: string }[];
   note?: string;
   cover?: { src: string; alt: string };
+  /** 宽卡用的横幅（两张截图并排） */
+  coverWide?: string;
 }
 
 /** 02 项目工坊：可以点开看的作品 */
@@ -109,6 +111,7 @@ export const works: CaseItem[] = [
       { label: "源码", href: "https://github.com/pengyuyan3d/3d-content-kit" },
     ],
     cover: { src: "shots/manual3d.webp", alt: "3D 装配说明书 Demo 截图" },
+    coverWide: "shots/kit-cover.webp",
   },
   {
     name: "CIP / Leadeep 企业 AI 工作台",
@@ -126,6 +129,7 @@ export const works: CaseItem[] = [
     result:
       "Web 与移动端共用一套任务状态与消息模型，异常路径（断线、重进、重复事件）有了恢复逻辑和回归测试。",
     tags: ["Python / FastAPI", "Flutter", "SQLite", "Redis", "多租户"],
+    cover: { src: "shots/cip-diagram.svg", alt: "CIP 工作台结构示意：Web/Flutter 客户端、FastAPI、SQLite 持久化、Redis 锁与幂等去重" },
     note: "企业内部系统，无公网 Demo；可现场讲代码与故障复现步骤。",
   },
   {
@@ -144,6 +148,7 @@ export const works: CaseItem[] = [
     result:
       "推送链路具备可重放语义；组织树与权限查询从逐节点请求收敛为按批查询，调用次数随组织规模线性可控。",
     tags: ["Go / Gin", "PostgreSQL", "幂等与回执", "并发控制"],
+    cover: { src: "shots/daguan-diagram.svg", alt: "大观授权推送结构示意：任务快照、幂等标识、事务与持久化回执" },
     note: "企业内部系统，无公网 Demo。",
   },
   {
@@ -162,6 +167,7 @@ export const works: CaseItem[] = [
     result:
       "从活动配置到笔记与评论产出跑通一条完整链路，模型异常有降级路径，重复执行不再产生重复内容。",
     tags: ["Vue 3 / TS", "FastAPI", "LLM 结构化输出", "Redis", "K8s"],
+    cover: { src: "shots/feihe-diagram.svg", alt: "飞鹤 KOS 结构示意：管理台与 H5、FastAPI、LLM 校验重试降级、评论异步任务" },
     note: "品牌方项目，无公网 Demo。",
   },
   {
@@ -178,6 +184,7 @@ export const works: CaseItem[] = [
     result: "一套能重复跑的故障测试与结论记录，用来检验自己对重试与幂等的判断，而不是停在「应该没问题」。",
     tags: ["Go", "goqite", "故障注入", "测试"],
     links: [{ label: "源码", href: "https://github.com/pengyuyan3d/order-reliability-lab" }],
+    cover: { src: "shots/orderlab-diagram.svg", alt: "订单可靠性实验结构示意：下单、goqite 队列、消费与故障注入" },
     note: "学习/实验项目，不是线上系统。",
   },
   {
@@ -226,7 +233,7 @@ export const works: CaseItem[] = [
       },
       { label: "源码", href: "https://github.com/pengyuyan3d/miaoban" },
     ],
-    cover: { src: "shots/miaoban.webp", alt: "喵伴桌面像素猫截图" },
+    cover: { src: "shots/miaoban-cover.webp", alt: "喵伴桌面像素猫截图" },
     note: "只做了 Windows；暂时没有声音，自定义花纹也只做了一半。",
   },
 ];

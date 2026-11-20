@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 550" width="880" height="550" role="img" aria-label="订单可靠性实验 · 故障注入">
+  <rect width="880" height="550" fill="#fdf9ee"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    
+  <g>
+    <rect x="40" y="200" width="150" height="76" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="54" y="227" font-size="19" font-weight="600" fill="#22322c">下单</text><text x="54" y="251" font-size="14" fill="#5c6b62">HTTP 入口</text></g>
+  <g>
+    <rect x="240" y="200" width="170" height="76" rx="3" fill="#fffdf7" stroke="#c2492c" stroke-width="1.4"/>
+    <text x="254" y="227" font-size="19" font-weight="600" fill="#22322c">goqite 队列</text><text x="254" y="251" font-size="14" fill="#5c6b62">SQLite 支撑</text></g>
+  <g>
+    <rect x="460" y="200" width="150" height="76" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="474" y="227" font-size="19" font-weight="600" fill="#22322c">消费</text><text x="474" y="251" font-size="14" fill="#5c6b62">重试 / 幂等</text></g>
+  <g>
+    <rect x="660" y="200" width="180" height="76" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="674" y="227" font-size="19" font-weight="600" fill="#22322c">状态落库</text><text x="674" y="251" font-size="14" fill="#5c6b62">可对照的终态</text></g>
+
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M190 238 L240 238"/>
+    <polygon points="240,238 234.1,241.8 234.1,234.2" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M410 238 L460 238"/>
+    <polygon points="460,238 454.1,241.8 454.1,234.2" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M610 238 L660 238"/>
+    <polygon points="660,238 654.1,241.8 654.1,234.2" fill="#8a968e" stroke="none"/>
+  </g>
+
+  <g>
+    <rect x="240" y="96" width="64.4" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
+    <text x="272.2" y="113" font-size="13" fill="#5c6b62" text-anchor="middle">重复投递</text>
+  </g> <g>
+    <rect x="400" y="96" width="37.2" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
+    <text x="418.6" y="113" font-size="13" fill="#5c6b62" text-anchor="middle">超时</text>
+  </g> <g>
+    <rect x="520" y="96" width="64.4" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
+    <text x="552.2" y="113" font-size="13" fill="#5c6b62" text-anchor="middle">进程重启</text>
+  </g>
+  <g stroke="#c2492c" stroke-width="1.2" fill="none">
+    <path d="M300 120 L320 200" stroke-dasharray="5 5"/>
+    <polygon points="320,200 314.9,195.2 322.2,193.4" fill="#c2492c" stroke="none"/>
+  </g>
+  <g stroke="#c2492c" stroke-width="1.2" fill="none">
+    <path d="M424 120 L420 200" stroke-dasharray="5 5"/>
+    <polygon points="420,200 416.5,193.9 424.0,194.3" fill="#c2492c" stroke="none"/>
+  </g>
+  <g stroke="#c2492c" stroke-width="1.2" fill="none">
+    <path d="M548 120 L500 200" stroke-dasharray="5 5"/>
+    <polygon points="500,200 499.8,193.0 506.3,196.9" fill="#c2492c" stroke="none"/>
+  </g>
+
+  <rect x="240" y="330" width="600" height="86" rx="3" fill="#fffdf7" stroke="#c9c2b2"/>
+  <text x="258" y="358" font-size="13" fill="#22322c" text-anchor="start" font-weight="600">故障注入测试：把「出错时会发生什么」变成可重复执行的实验</text>
+  <text x="258" y="382" font-size="12.5" fill="#5c6b62" text-anchor="start" font-weight="400">每次跑完记录实际行为，对照自己对重试与幂等的判断</text>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M380 276 L380 330" stroke-dasharray="5 5"/>
+    <polygon points="380,330 376.2,324.1 383.8,324.1" fill="#8a968e" stroke="none"/>
+  </g>
+
+  <text x="40" y="452" font-size="12" fill="#8a968e" text-anchor="start" font-weight="400">学习项目，不是线上系统；README 标注了 AI 辅助脚手架的范围</text>
+  
+  </g>
+  <text x="24" y="528" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#8a968e" letter-spacing="0.08em">订单可靠性实验 · 故障注入</text>
+</svg>

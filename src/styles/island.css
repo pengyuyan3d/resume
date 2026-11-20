@@ -836,10 +836,8 @@ body.has-panel .scrim {
 
 .index-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(34, 50, 44, 0.12);
-  border: 1px solid rgba(34, 50, 44, 0.12);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .work-card {
@@ -849,11 +847,32 @@ body.has-panel .scrim {
   gap: 12px;
   padding: 26px;
   background: #fffdf7;
-  transition: background 0.3s ease;
+  border: 1px solid rgba(34, 50, 44, 0.14);
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
 .work-card:hover {
-  background: #101917;
+  border-color: rgba(34, 50, 44, 0.32);
+  transform: translateY(-2px);
+}
+
+.card-cover {
+  margin: -26px -26px 4px;
+  border-bottom: 1px solid rgba(34, 50, 44, 0.12);
+  background: #fdf9ee;
+}
+
+.card-cover img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 880 / 550;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.work-card:hover .card-cover img {
+  transform: scale(1.015);
 }
 
 .work-card .wno {
@@ -886,7 +905,11 @@ body.has-panel .scrim {
 }
 
 .work-card.is-wide {
-  grid-column: span 2;
+  grid-column: span 3;
+}
+
+.work-card.is-wide .card-cover img {
+  aspect-ratio: 1760 / 550;
 }
 
 .work-card.is-wide .wide-inner {
@@ -978,6 +1001,14 @@ body.has-panel .scrim {
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 1080px) {
+  .index-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .work-card.is-wide {
+    grid-column: span 2;
+  }
+
   .stage-inner {
     grid-template-columns: 1fr;
     gap: 34px;
@@ -994,6 +1025,23 @@ body.has-panel .scrim {
 }
 
 @media (max-width: 760px) {
+  .index-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .work-card.is-wide {
+    grid-column: span 1;
+  }
+
+  .work-card {
+    padding: 20px;
+  }
+
+  .card-cover {
+    margin: -20px -20px 4px;
+  }
+
   .stage {
     min-height: auto;
     overflow: visible;

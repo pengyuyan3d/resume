@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 550" width="880" height="550" role="img" aria-label="大观 · 授权推送与批量查询">
+  <rect width="880" height="550" fill="#fdf9ee"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    
+  <g>
+    <rect x="30" y="56" width="190" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="44" y="83" font-size="19" font-weight="600" fill="#22322c">租户授权推送</text><text x="44" y="107" font-size="14" fill="#5c6b62">跨服务调用</text></g>
+  <g>
+    <rect x="280" y="56" width="200" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="294" y="83" font-size="19" font-weight="600" fill="#22322c">任务快照</text><text x="294" y="107" font-size="14" fill="#5c6b62">记录这次要做什么</text></g>
+  <g>
+    <rect x="280" y="158" width="200" height="78" rx="3" fill="#fffdf7" stroke="#c2492c" stroke-width="1.4"/>
+    <text x="294" y="185" font-size="19" font-weight="600" fill="#22322c">幂等标识</text><text x="294" y="209" font-size="14" fill="#5c6b62">同一任务只执行一次</text></g>
+  <g>
+    <rect x="540" y="56" width="170" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="554" y="83" font-size="19" font-weight="600" fill="#22322c">事务</text><text x="554" y="107" font-size="14" fill="#5c6b62">本地变更原子提交</text></g>
+  <g>
+    <rect x="540" y="158" width="170" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="554" y="185" font-size="19" font-weight="600" fill="#22322c">持久化回执</text><text x="554" y="209" font-size="14" fill="#5c6b62">结果可查、可重放</text></g>
+  <g>
+    <rect x="740" y="56" width="110" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="754" y="83" font-size="19" font-weight="600" fill="#22322c">可重放</text><text x="754" y="107" font-size="14" fill="#5c6b62">未知结果</text></g>
+
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M220 95 L280 95"/>
+    <polygon points="280,95 274.1,98.8 274.1,91.2" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M380 134 L380 158"/>
+    <polygon points="380,158 376.2,152.1 383.8,152.1" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M480 95 L540 95"/>
+    <polygon points="540,95 534.1,98.8 534.1,91.2" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M480 197 L540 197"/>
+    <polygon points="540,197 534.1,200.8 534.1,193.2" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M710 95 L740 95"/>
+    <polygon points="740,95 734.1,98.8 734.1,91.2" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M625 134 L625 158"/>
+    <polygon points="625,158 621.2,152.1 628.8,152.1" fill="#8a968e" stroke="none"/>
+  </g>
+
+  <rect x="30" y="286" width="820" height="94" rx="3" fill="#fffdf7" stroke="#c9c2b2"/>
+  <text x="48" y="314" font-size="14" fill="#22322c" text-anchor="start" font-weight="600">组织树：逐节点读取（N 次查询） → 一次管理关系查询 + 内存遍历</text>
+  <text x="48" y="340" font-size="12.5" fill="#5c6b62" text-anchor="start" font-weight="400">权限查询按每批 100 个组织执行，配有界并发与超时控制</text>
+  <text x="48" y="362" font-size="12.5" fill="#5c6b62" text-anchor="start" font-weight="400">补了权限接口与数据库迁移的回归测试</text>
+
+  <text x="30" y="428" font-size="13" fill="#22322c" text-anchor="start" font-weight="400">结果：推送链路具备幂等语义，重复请求与未知结果都能安全重放</text>
+  
+  </g>
+  <text x="24" y="528" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#8a968e" letter-spacing="0.08em">大观 · 授权推送与批量查询</text>
+</svg>

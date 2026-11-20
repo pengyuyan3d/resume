@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 550" width="880" height="550" role="img" aria-label="CIP / Leadeep · 终态一致性">
+  <rect width="880" height="550" fill="#fdf9ee"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    
+  <g>
+    <rect x="30" y="60" width="180" height="84" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="44" y="87" font-size="19" font-weight="600" fill="#22322c">Web 工作台</text><text x="44" y="111" font-size="14" fill="#5c6b62">流式对话 · 附件</text></g>
+  <g>
+    <rect x="30" y="168" width="180" height="84" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="44" y="195" font-size="19" font-weight="600" fill="#22322c">Flutter 客户端</text><text x="44" y="219" font-size="14" fill="#5c6b62">同一套任务状态</text></g>
+  <g>
+    <rect x="300" y="100" width="250" height="112" rx="3" fill="#fffdf7" stroke="#c2492c" stroke-width="1.4"/>
+    <text x="314" y="127" font-size="19" font-weight="600" fill="#22322c">FastAPI 服务</text><text x="314" y="151" font-size="14" fill="#5c6b62">会话 / 消息 / 任务</text></g>
+  <g>
+    <rect x="640" y="44" width="210" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="654" y="71" font-size="19" font-weight="600" fill="#22322c">SQLite 持久化</text><text x="654" y="95" font-size="14" fill="#5c6b62">重进时增量恢复</text></g>
+  <g>
+    <rect x="640" y="140" width="210" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="654" y="167" font-size="19" font-weight="600" fill="#22322c">Redis 锁</text><text x="654" y="191" font-size="14" fill="#5c6b62">多租户 Token 刷新</text></g>
+  <g>
+    <rect x="640" y="236" width="210" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="654" y="263" font-size="19" font-weight="600" fill="#22322c">幂等去重</text><text x="654" y="287" font-size="14" fill="#5c6b62">重复事件只落一次</text></g>
+
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M210 102 L300 130"/>
+    <polygon points="300,130 293.2,131.8 295.5,124.7" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M210 210 L300 186"/>
+    <polygon points="300,186 295.3,191.1 293.3,183.9" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M550 140 L640 86"/>
+    <polygon points="640,86 636.9,92.3 633.0,85.8" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M550 160 L640 178"/>
+    <polygon points="640,178 633.5,180.5 634.9,173.2" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M550 186 L640 268"/>
+    <polygon points="640,268 633.1,266.8 638.2,261.2" fill="#8a968e" stroke="none"/>
+  </g>
+
+  <g>
+    <rect x="300" y="380" width="37.2" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
+    <text x="318.6" y="397" font-size="13" fill="#5c6b62" text-anchor="middle">断线</text>
+  </g> <g>
+    <rect x="380" y="380" width="64.4" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
+    <text x="412.2" y="397" font-size="13" fill="#5c6b62" text-anchor="middle">应用重进</text>
+  </g> <g>
+    <rect x="488" y="380" width="64.4" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
+    <text x="520.2" y="397" font-size="13" fill="#5c6b62" text-anchor="middle">重复事件</text>
+  </g>
+  <g stroke="#c2492c" stroke-width="1.2" fill="none">
+    <path d="M350 380 L388 216" stroke-dasharray="5 5"/>
+    <polygon points="388,216 390.3,222.6 383.0,220.9" fill="#c2492c" stroke="none"/>
+  </g>
+  <g stroke="#c2492c" stroke-width="1.2" fill="none">
+    <path d="M430 380 L430 216" stroke-dasharray="5 5"/>
+    <polygon points="430,216 433.8,221.9 426.2,221.9" fill="#c2492c" stroke="none"/>
+  </g>
+  <g stroke="#c2492c" stroke-width="1.2" fill="none">
+    <path d="M515 380 L472 216" stroke-dasharray="5 5"/>
+    <polygon points="472,216 477.1,220.8 469.9,222.7" fill="#c2492c" stroke="none"/>
+  </g>
+
+  <text x="30" y="452" font-size="13" fill="#22322c" text-anchor="start" font-weight="400">终态一致：历史消息 = 实时消息；任务有明确的 完成 / 失败 / 可重试</text>
+  <text x="30" y="476" font-size="12" fill="#5c6b62" text-anchor="start" font-weight="400">断线、重进、重复事件都有恢复路径与回归测试</text>
+  
+  </g>
+  <text x="24" y="528" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#8a968e" letter-spacing="0.08em">CIP / Leadeep · 终态一致性</text>
+</svg>
