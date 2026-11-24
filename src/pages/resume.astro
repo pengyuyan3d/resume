@@ -1,6 +1,5 @@
 ﻿---
 import { siteConfig } from "../config";
-import "../styles/global.css";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const edu = siteConfig.education[0];
 ---
@@ -9,217 +8,481 @@ const edu = siteConfig.education[0];
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>{siteConfig.name} · 简历（一页版）</title>
+    <title>{siteConfig.name} - 全栈开发工程师简历</title>
     <style is:global>
       @page {
         size: A4;
-        margin: 10mm 12mm;
+        margin: 10.5mm 13mm;
+      }
+
+      * {
+        box-sizing: border-box;
       }
 
       body {
         margin: 0;
-        background: #fff !important;
-        color: #111 !important;
+        padding: 0;
+        background: #ffffff !important;
+        color: #262626 !important;
         font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-          "Noto Sans CJK SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+          "PingFang SC", "Noto Sans CJK SC", "Noto Sans SC", "Microsoft YaHei",
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
-        overflow-x: visible !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
 
       a {
-        color: inherit;
+        color: #1b4f72;
         text-decoration: none;
       }
 
-      .ext-link {
-        color: #b54025;
+      a:hover {
         text-decoration: underline;
-        text-underline-offset: 2px;
-      }
-
-      .mono {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      }
-
-      .rule {
-        height: 1px;
-        background: #dcdfe5;
-      }
-
-      h1,
-      h2,
-      h3,
-      p,
-      ul {
-        margin: 0;
-      }
-
-      ul {
-        padding: 0;
-        list-style: none;
-      }
-
-      .avoid {
-        break-inside: avoid;
       }
 
       @media screen {
         body {
-          background: #eceef2;
+          background: #eef2f6 !important;
+          padding: 28px 0;
         }
-
-        .sheet {
-          box-shadow: 0 20px 60px -30px rgba(0, 0, 0, 0.45);
-          margin: 32px auto;
-          max-width: 820px;
-          padding: 36px 42px;
-          background: #fff;
+        .cv-page {
+          width: 210mm;
+          min-height: 297mm;
+          margin: 0 auto;
+          padding: 11mm 13.5mm;
+          background: #ffffff;
+          box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
         }
       }
 
       @media print {
-        .sheet {
+        body {
+          background: #ffffff !important;
           padding: 0;
+        }
+        .cv-page {
+          width: 100%;
           margin: 0;
-          max-width: none;
+          padding: 0;
           box-shadow: none;
         }
+      }
+
+      /* 顶部个人信息 + 标准一寸证件照 */
+      .cv-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding-bottom: 9px;
+        border-bottom: 2px solid #1b4f72;
+      }
+
+      .cv-header-main {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .cv-name-row {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .cv-name {
+        margin: 0;
+        font-size: 22pt;
+        font-weight: 700;
+        color: #111827;
+        letter-spacing: 0.02em;
+        line-height: 1.1;
+      }
+
+      .cv-target {
+        font-size: 11pt;
+        font-weight: 600;
+        color: #1b4f72;
+      }
+
+      .cv-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+      }
+
+      .cv-badge {
+        display: inline-block;
+        padding: 1.5px 7px;
+        font-size: 8.5pt;
+        font-weight: 600;
+        color: #1b4f72;
+        background: #edf4f9;
+        border: 1px solid #cbe0f0;
+        border-radius: 3px;
+      }
+
+      .cv-meta-grid {
+        margin-top: 7px;
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: start;
+        gap: 3px 22px;
+        font-size: 9.2pt;
+        color: #374151;
+        line-height: 1.45;
+      }
+
+      .cv-meta-grid b {
+        color: #111827;
+        font-weight: 600;
+      }
+
+      .cv-link {
+        color: #1b4f72;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(27, 79, 114, 0.35);
+      }
+
+      .cv-photo-wrap {
+        width: 26.5mm;
+        height: 37mm;
+        flex-shrink: 0;
+        border: 1px solid #d8e1e8;
+        border-radius: 3px;
+        overflow: hidden;
+        background: #f8fafc;
+      }
+
+      .cv-photo-wrap img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+      }
+
+      /* 经典大厂单栏分节标题（WonderCV 高赞范式） */
+      .cv-section {
+        margin-top: 9.5px;
+      }
+
+      .cv-sec-title {
+        margin: 0 0 6px;
+        padding: 3px 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #f3f7fa;
+        border-left: 3.5px solid #1b4f72;
+        border-bottom: 1px solid #dce6ef;
+      }
+
+      .cv-sec-title span:first-child {
+        font-size: 10.5pt;
+        font-weight: 700;
+        color: #1b4f72;
+        letter-spacing: 0.03em;
+      }
+
+      .cv-sec-title span:last-child {
+        font-size: 8pt;
+        font-weight: 600;
+        color: #7b8a9b;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      /* 教育背景 */
+      .cv-edu-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        font-size: 9.8pt;
+        padding: 0 2px;
+      }
+
+      .cv-edu-school {
+        font-size: 10.3pt;
+        font-weight: 700;
+        color: #111827;
+      }
+
+      .cv-edu-detail {
+        margin: 3px 0 0;
+        padding: 0 2px;
+        font-size: 9.2pt;
+        color: #374151;
+        line-height: 1.5;
+      }
+
+      /* 专业技能（分类描述法） */
+      .cv-skills-list {
+        margin: 0;
+        padding: 0 2px;
+        list-style: none;
+        display: grid;
+        gap: 3.5px;
+      }
+
+      .cv-skills-list li {
+        position: relative;
+        padding-left: 11px;
+        font-size: 9.2pt;
+        line-height: 1.48;
+        color: #2d3748;
+      }
+
+      .cv-skills-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #1b4f72;
+        font-weight: 700;
+      }
+
+      /* 研发经历 & 项目经验 */
+      .cv-item {
+        padding: 0 2px;
+      }
+
+      .cv-item + .cv-item {
+        margin-top: 7.5px;
+      }
+
+      .cv-item-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .cv-item-title {
+        font-size: 10.1pt;
+        font-weight: 700;
+        color: #111827;
+      }
+
+      .cv-item-role {
+        font-size: 9.4pt;
+        font-weight: 600;
+        color: #1b4f72;
+        margin-left: 8px;
+      }
+
+      .cv-item-right {
+        font-size: 8.8pt;
+        color: #526071;
+        white-space: nowrap;
+      }
+
+      .cv-item-tech {
+        margin: 2px 0 3px;
+        font-size: 8.6pt;
+        color: #5a6878;
+      }
+
+      .cv-bullets {
+        margin: 3px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 3px;
+      }
+
+      .cv-bullets li {
+        position: relative;
+        padding-left: 11px;
+        font-size: 9.15pt;
+        line-height: 1.48;
+        color: #2d3748;
+        text-align: justify;
+      }
+
+      .cv-bullets li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #1b4f72;
+        font-weight: 700;
+      }
+
+      .cv-bullets b,
+      .cv-skills-list b,
+      .cv-edu-detail b {
+        color: #111827;
+        font-weight: 600;
       }
     </style>
   </head>
 
   <body>
-    <main class="sheet">
-      <!-- 抬头 -->
-      <header class="flex items-start justify-between gap-6">
-        <div>
-          <h1 class="text-[29px] font-bold leading-none tracking-[-0.02em]">
-            {siteConfig.name}
-          </h1>
-          <p class="mt-2 text-[13px] font-semibold text-[#222]">
-            全栈开发工程师 <span class="text-[#666]">· AI 应用与产品闭环</span>
-          </p>
-          <p class="mt-1.5 text-[9.5px] font-medium text-[#b54025]">
-            国家奖学金 · 专业 Top 5% · 福建省大学生数学竞赛一等奖
-          </p>
+    <main class="cv-page">
+      <!-- 1. 头部个人信息 + 标准一寸白衬衫证件照 -->
+      <header class="cv-header">
+        <div class="cv-header-main">
+          <div class="cv-name-row">
+            <h1 class="cv-name">{siteConfig.name}</h1>
+            <span class="cv-target">求职意向：全栈开发工程师（AI 应用 / Python·Go 后端）</span>
+          </div>
+          <div class="cv-badges">
+            <span class="cv-badge">国家奖学金</span>
+            <span class="cv-badge">专业排名 Top 5%</span>
+            <span class="cv-badge">全国大学生数学竞赛省一等奖</span>
+            <span class="cv-badge">2026 届本科 · 北京随时到岗</span>
+          </div>
+          <div class="cv-meta-grid">
+            <span><b>电话：</b>{siteConfig.phoneFormatted}</span>
+            <span><b>邮箱：</b><a href={`mailto:${siteConfig.social.email}`}>{siteConfig.social.email}</a></span>
+            <span>
+              <b>在线作品集：</b><a class="cv-link" href={siteConfig.portfolioUrl}>pengyuyan3d.github.io/resume</a>
+            </span>
+            <span>
+              <b>GitHub：</b><a class="cv-link" href={siteConfig.social.github}>github.com/pengyuyan3d</a>
+            </span>
+          </div>
         </div>
-        <div class="mono mt-0.5 space-y-0.5 text-right text-[10px] leading-relaxed text-[#333]">
-          <p>{siteConfig.phoneFormatted} · <a href={`mailto:${siteConfig.social.email}`}>{siteConfig.social.email}</a></p>
-          <p>{siteConfig.location} · 2026 届本科 · 随时到岗</p>
-          <p>
-            在线作品集与可玩 Demo：<a class="ext-link" href={siteConfig.portfolioUrl}>pengyuyan3d.github.io/resume</a>
-          </p>
-          <p>
-            GitHub：<a class="ext-link" href={siteConfig.social.github}>github.com/pengyuyan3d</a>
-          </p>
+        <div class="cv-photo-wrap">
+          <img src={`${base}/id-photo.jpg`} alt="张雨证件照" width="265" height="370" />
         </div>
       </header>
 
-      <div class="rule mt-3.5"></div>
-
-      <!-- 概述 -->
-      <section class="avoid mt-3.5">
-        <p class="text-[9.8px] leading-[1.72] text-[#2b3038]">{siteConfig.aboutMe}</p>
-      </section>
-
-      <div class="mt-3.5 grid grid-cols-[1.68fr_1fr] gap-6">
-        <!-- 左：研发经历（隐去起止时间，聚焦工程交付） -->
-        <section>
-          <h2 class="mono text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#7a828e]">
-            Experience · 研发与交付经历
-          </h2>
-          <div class="mt-2 space-y-2.5">
-            {
-              siteConfig.experience.map((job) => (
-                <article class="avoid border-t border-[#e5e7ec] pt-2 first:border-0 first:pt-0">
-                  <div class="flex flex-wrap items-baseline gap-x-2">
-                    <h3 class="text-[10.8px] font-bold text-[#181c22]">{job.company}</h3>
-                    <span class="text-[9.8px] font-medium text-[#555]">{job.title}</span>
-                  </div>
-                  <ul class="mt-1 space-y-1">
-                    {job.bullets.map((b) => (
-                      <li class="flex gap-1.5 text-[9.3px] leading-[1.62] text-[#353b45]">
-                        <span class="mt-[6px] h-[3px] w-[3px] shrink-0 rounded-full bg-[#b54025]" />
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))
-            }
-          </div>
-        </section>
-
-        <!-- 右：技能 / 教育 -->
-        <div class="space-y-3.5">
-          <section class="avoid">
-            <h2 class="mono text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#7a828e]">
-              Skills · 技术栈
-            </h2>
-            <ul class="mt-2 flex flex-wrap gap-1">
-              {siteConfig.skills.map((s) => (
-                <li class="rounded border border-[#dde1e7] bg-[#fafbfc] px-1.5 py-0.5 text-[8.8px] font-medium text-[#353b45]">
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section class="avoid">
-            <h2 class="mono text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#7a828e]">
-              Education · 教育与荣誉
-            </h2>
-            <div class="mt-2">
-              <div class="flex items-baseline justify-between gap-2">
-                <p class="text-[10.5px] font-bold text-[#181c22]">{edu.school}</p>
-                <span class="mono text-[8.8px] text-[#7a828e]">{edu.dateRange}</span>
-              </div>
-              <p class="mt-0.5 text-[9.5px] text-[#353b45]">{edu.degree}</p>
-              <ul class="mt-1 space-y-0.5">
-                {edu.achievements.map((a) => (
-                  <li class="text-[9px] leading-[1.58] text-[#353b45]">· {a}</li>
-                ))}
-              </ul>
-            </div>
-          </section>
-        </div>
-      </div>
-
-      <!-- 代表项目 -->
-      <section class="avoid mt-3.5">
-        <h2 class="mono text-[9.5px] font-semibold uppercase tracking-[0.14em] text-[#7a828e]">
-          Selected Projects · 代表作与架构落地
+      <!-- 2. 教育背景（校招/新锐工程师黄金置顶，第一眼亮出国奖硬指标） -->
+      <section class="cv-section">
+        <h2 class="cv-sec-title">
+          <span>教育背景</span>
+          <span>Education</span>
         </h2>
-        <div class="mt-2 grid grid-cols-2 gap-x-5 gap-y-2.5">
-          {
-            siteConfig.projects.map((p) => (
-              <article class="avoid">
-                <div class="flex items-baseline justify-between gap-2">
-                  <h3 class="text-[10.2px] font-bold leading-snug text-[#181c22]">{p.name}</h3>
-                  {p.link && (
-                    <a class="ext-link mono shrink-0 text-[8.5px]" href={p.link}>
-                      {p.linkLabel || "在线预览"} ↗
-                    </a>
-                  )}
-                </div>
-                <p class="mt-0.5 text-[8.9px] leading-[1.58] text-[#353b45]">{p.description}</p>
-                <p class="mono mt-0.5 text-[8.3px] text-[#7a828e]">{p.skills.join(" · ")}</p>
-              </article>
-            ))
-          }
+        <div class="cv-edu-row">
+          <div>
+            <span class="cv-edu-school">{edu.school}</span>
+            <span class="cv-item-role">{edu.degree}</span>
+          </div>
+          <span class="cv-item-right">{edu.dateRange}</span>
+        </div>
+        <p class="cv-edu-detail">
+          <b>学业与荣誉：</b>GPA <b>3.4 / 4.0（专业前 5%）</b> · 荣获教育部<b>国家奖学金</b> · 全国大学生数学竞赛（福建赛区）<b>省一等奖</b>
+        </p>
+      </section>
+
+      <!-- 3. 专业技能（大厂标准分类描述法，兼顾 ATS 关键词与工程深度） -->
+      <section class="cv-section">
+        <h2 class="cv-sec-title">
+          <span>专业技能</span>
+          <span>Technical Skills</span>
+        </h2>
+        <ul class="cv-skills-list">
+          <li>
+            <b>后端研发与可靠性：</b>熟练使用 <b>Python (FastAPI)</b>、<b>Go (Gin)</b> 开发生产级服务；具备跨服务<b>幂等重放</b>、分批有界并发控制、异步任务恢复及 SQLite 底层只读沙箱隔离实战经验。
+          </li>
+          <li>
+            <b>前端与多端闭环：</b>熟练掌握 <b>Vue 3</b>、<b>React</b>、<b>TypeScript</b>、<b>Astro</b> 与 <b>Flutter</b> 客户端开发；掌握 <b>Three.js</b> WebGL 三维交互与声明式静态编译管线，具备一人闭环端到端交付能力。
+          </li>
+          <li>
+            <b>AI 应用工程化：</b>熟悉 <b>LangGraph</b> 显式状态机编排、<b>BM25 + Dense RRF 混合检索</b>与条款级溯源、LLM <b>结构化输出校验/重试/降级</b>链路，以及网关层敏感实体归一化流式脱敏。
+          </li>
+          <li>
+            <b>数据存储与云原生：</b>熟练使用 <b>PostgreSQL</b>、<b>SQLite</b>（游标增量恢复）与 <b>Redis</b>（分布式锁、TTL 语义缓存）；熟悉 <b>Docker</b>、<b>Harbor</b>、<b>Kubernetes</b> 部署联调与 GitHub Actions CI/CD。
+          </li>
+        </ul>
+      </section>
+
+      <!-- 4. 工作与研发经历（按要求不展示工作起止时间，聚焦企业级交付与量化收敛） -->
+      <section class="cv-section">
+        <h2 class="cv-sec-title">
+          <span>工作与研发经历</span>
+          <span>Professional Experience</span>
+        </h2>
+
+        <div class="cv-item">
+          <div class="cv-item-head">
+            <div>
+              <span class="cv-item-title">北京衔远科技有限公司</span>
+              <span class="cv-item-role">全栈开发工程师（企业级 AI 产品线）</span>
+            </div>
+            <span class="cv-item-right">北京</span>
+          </div>
+          <ul class="cv-bullets">
+            <li>
+              <b>【CIP / Leadeep 企业 AI 工作台】</b>负责 <b>FastAPI 后端 + Flutter 客户端 + React 分享页</b>研发，打通流式对话、历史消息与 STS 直传附件；针对弱网断线、应用被杀重进与重复事件，落地 <b>SQLite 持久化 + 事件幂等去重 + 游标增量恢复</b>，并用 <b>Redis 分布式锁</b>协调多租户 Token 并发刷新，彻底收敛跨端任务终态不一致。
+            </li>
+            <li>
+              <b>【大观 · 身份权限与跨服务运营】</b>参与 <b>Go IAM 与 Python 服务</b>联调，采用<b>「任务快照 + 幂等标识 + 本地事务 + 持久化回执」</b>机制实现超时未知结果与重复请求的安全重放；将组织架构树由逐节点 N+1 读取重构为<b>单次管理关系表查询 + 内存遍历构树</b>，权限校验按<b>每批 100 个组织有界并发</b>加超时保护执行。
+            </li>
+            <li>
+              <b>【飞鹤 KOS AI 内容生成系统】</b>独立开发 <b>Vue 3 / TypeScript 运营管理台、消费者 H5 与 FastAPI 会话接口</b>（接入 RBAC 菜单权限）；为 3 风格种草笔记生成构建 <b>Schema 结构化校验 → 自动纠错重试 → 保底降级</b>链路，以 <b>Redis 锁与恢复接口</b>兜底长链路异步评论任务防重，完成 Docker / Harbor / K8s 环境联调。
+            </li>
+          </ul>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-head">
+            <div>
+              <span class="cv-item-title">星域文化传媒有限公司</span>
+              <span class="cv-item-role">玩法与交互逻辑开发</span>
+            </div>
+            <span class="cv-item-right">可玩性验证与数据调优</span>
+          </div>
+          <ul class="cv-bullets">
+            <li>
+              <b>【核心机制研发与留存迭代】</b>主导《暴走拖拉机》核心玩法状态机与可复用行为模块构建，结合对局遥测与留存漏斗持续迭代数值手感，上线后稳定取得<b>周活 2000+</b>，获评平台 <b>A 级标杆作品</b>。
+            </li>
+          </ul>
         </div>
       </section>
 
-      <div class="rule mt-3.5"></div>
-      <p class="mono mt-1.5 flex items-center justify-between text-[8px] text-[#8a919c]">
-        <span>
-          {siteConfig.name} · 交互式作品集（含在线可运行 Demo 与架构复盘）：<a class="ext-link" href={siteConfig.portfolioUrl}>pengyuyan3d.github.io/resume</a>
-        </span>
-        <span>更新于 {new Date().toLocaleDateString("zh-CN", { year: "numeric", month: "2-digit" })}</span>
-      </p>
+      <!-- 5. 独立全栈代表项目（均可直接在浏览器点开核验） -->
+      <section class="cv-section">
+        <h2 class="cv-sec-title">
+          <span>代表项目经验</span>
+          <span>Selected Projects</span>
+        </h2>
+
+        <div class="cv-item">
+          <div class="cv-item-head">
+            <div>
+              <span class="cv-item-title">智审领航 · AuditPilot（企业级智能审计与风险核查工作台）</span>
+              <span class="cv-item-role">独立全栈架构与开发</span>
+            </div>
+            <span class="cv-item-right">
+              <a class="cv-link" href="https://pengyuyan3d.github.io/audit-pilot/">在线工作台 ↗</a> · <a class="cv-link" href="https://github.com/pengyuyan3d/audit-pilot">源码 ↗</a>
+            </span>
+          </div>
+          <p class="cv-item-tech"><b>技术栈：</b>Python 3.11 · FastAPI · LangGraph · BM25 + Dense 混合 RAG · SQLite Authorizer · Docker / K8s</p>
+          <ul class="cv-bullets">
+            <li>
+              <b>【确定性算账与安全沙箱】</b>剥离大模型算术幻觉，设计 L1 确定性算子精准识别同日拆分规避审批、连日重付等异常；基于 <b>SQLite Authorizer 底层钩子</b>实现零信任只读 SQL 沙箱，从引擎层拦截多语句与写注入。
+            </li>
+            <li>
+              <b>【混合溯源与流式脱敏网关】</b>构建 <b>BM25 + Dense RRF 融合重排</b>实现精确到合同条款号的证据溯源及台账交叉核对；研发外发 API <b>跨格式实体归一化脱敏与 SSE 流式实时还原网关</b>，在 12 项黄金评测集中达成 <b>100% 通过率、PII 零泄露</b>，TTL 缓存命中延迟由 <b>43.7ms 降至 1.3ms</b>。
+            </li>
+          </ul>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-head">
+            <div>
+              <span class="cv-item-title">3D 内容工厂（装配说明书 3D 化与 360° 全景看店编译引擎）</span>
+              <span class="cv-item-role">独立产品设计与开发</span>
+            </div>
+            <span class="cv-item-right">
+              <a class="cv-link" href="https://pengyuyan3d.github.io/3d-content-kit/">双产品线在线 Demo ↗</a> · <a class="cv-link" href="https://github.com/pengyuyan3d/3d-content-kit">源码 ↗</a>
+            </span>
+          </div>
+          <p class="cv-item-tech"><b>技术栈：</b>TypeScript · Three.js · Next.js · 声明式数据契约 · 零后端静态编译</p>
+          <ul class="cv-bullets">
+            <li>
+              <b>【双线共用三维编译内核】</b>定义极简「零件表 + 步骤表 / 全景图 + 空间热点」数据格式，一条命令编译生成零后端单页 3D 应用；支持三维分步高亮拆装、尺寸五金检视与原书页同屏对照，前置坏数据校验门禁拦截越界与缺图异常。
+            </li>
+          </ul>
+        </div>
+      </section>
     </main>
   </body>
 </html>

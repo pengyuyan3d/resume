@@ -101,9 +101,11 @@ const chrome = spawn(
   [
     "--headless=new",
     "--no-sandbox",
-    "--disable-gpu",
+    "--enable-webgl",
+    "--ignore-gpu-blocklist",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
     "--hide-scrollbars",
-    "--force-prefers-reduced-motion",
     "--no-first-run",
     "--disable-extensions",
     `--user-data-dir=${profile}`,
@@ -161,11 +163,16 @@ try {
     const scratchShots = process.env.SHOT_OUT_DIR;
     if (scratchShots) {
       mkdirSync(scratchShots, { recursive: true });
-      await send("Emulation.setDeviceMetricsOverride", { width: 1440, height: 900, deviceScaleFactor: 1.5, mobile: false });
+      await send("Emulation.setDeviceMetricsOverride", { width: 1440, height: 900, deviceScaleFactor: 2, mobile: false });
       await send("Page.navigate", { url: `http://127.0.0.1:${httpPort}/resume/` });
-      await sleep(1200);
+      await sleep(1600);
       const desktopHero = await send("Page.captureScreenshot", { format: "png" });
       writeFileSync(join(scratchShots, "verify-desktop.png"), Buffer.from(desktopHero.data, "base64"));
+
+      await send("Runtime.evaluate", { expression: "window.scrollTo(0, 920)" });
+      await sleep(700);
+      const desktopCards = await send("Page.captureScreenshot", { format: "png" });
+      writeFileSync(join(scratchShots, "verify-cards.png"), Buffer.from(desktopCards.data, "base64"));
 
       await send("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
       await send("Page.navigate", { url: `http://127.0.0.1:${httpPort}/resume/` });

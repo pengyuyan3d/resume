@@ -1,78 +1,105 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 550" width="880" height="550" role="img" aria-label="飞鹤 KOS · LLM 输出进业务">
-  <rect width="880" height="550" fill="#fdf9ee"/>
-  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 550" width="880" height="550" role="img" aria-label="feihe-kos · LLM 结构化校验降级与长链路异步防重">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="55%" stop-color="#fce7f3"/>
+      <stop offset="100%" stop-color="#e0f2fe"/>
+    </linearGradient>
+    <filter id="winShadow" x="-8%" y="-6%" width="116%" height="120%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#0f172a" flood-opacity="0.13"/>
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+    <filter id="cardShadow" x="-6%" y="-6%" width="112%" height="118%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.05"/>
+    </filter>
+  </defs>
+
+  <!-- 柔和极光底衬 -->
+  <rect width="880" height="550" fill="url(#bg)"/>
+  <circle cx="760" cy="80" r="190" fill="#ffffff" opacity="0.38"/>
+  <circle cx="110" cy="470" r="160" fill="#ffffff" opacity="0.28"/>
+
+  <!-- 拟物浏览器主窗口 -->
+  <g filter="url(#winShadow)">
+    <rect x="46" y="38" width="788" height="474" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <!-- 顶栏 -->
+    <path d="M46 54 Q46 38 62 38 L818 38 Q834 38 834 54 L834 82 L46 82 Z" fill="#f8fafc"/>
+    <line x1="46" y1="82" x2="834" y2="82" stroke="#edf2f7" stroke-width="1"/>
+    <circle cx="72" cy="60" r="5.5" fill="#fb7185"/>
+    <circle cx="90" cy="60" r="5.5" fill="#fbbf24"/>
+    <circle cx="108" cy="60" r="5.5" fill="#34d399"/>
+
+    <!-- 地址栏 -->
+    <rect x="240" y="48" width="340" height="24" rx="6" fill="#ffffff" stroke="#e2e8f0"/>
+    <text x="410" y="64" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#64748b">feihe-kos · LLM 结构化校验降级与长链路异步防重</text>
+
+    <!-- 右上状态胶囊 -->
+    <rect x="692" y="48" width="122" height="24" rx="12" fill="#d97706" fill-opacity="0.12"/>
+    <circle cx="707" cy="60" r="3.8" fill="#d97706"/>
+    <text x="717" y="64" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" font-weight="600" fill="#d97706">全栈闭环上线</text>
+  </g>
+
+  <!-- 窗口内容 -->
+  <g font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif">
     
-  <g>
-    <rect x="30" y="50" width="170" height="74" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="44" y="77" font-size="19" font-weight="600" fill="#22322c">管理台 Vue 3</text><text x="44" y="101" font-size="14" fill="#5c6b62">活动配置 · RBAC</text></g>
-  <g>
-    <rect x="30" y="146" width="170" height="74" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="44" y="173" font-size="19" font-weight="600" fill="#22322c">消费者 H5</text><text x="44" y="197" font-size="14" fill="#5c6b62">问答 · 结果展示</text></g>
-  <g>
-    <rect x="260" y="96" width="210" height="78" rx="3" fill="#fffdf7" stroke="#c2492c" stroke-width="1.4"/>
-    <text x="274" y="123" font-size="19" font-weight="600" fill="#22322c">FastAPI</text><text x="274" y="147" font-size="14" fill="#5c6b62">活动 / 会话接口</text></g>
-  <g>
-    <rect x="540" y="50" width="150" height="74" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="554" y="77" font-size="19" font-weight="600" fill="#22322c">LLM 导写</text><text x="554" y="101" font-size="14" fill="#5c6b62">3 种风格草稿</text></g>
-  <g>
-    <rect x="540" y="146" width="150" height="74" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="554" y="173" font-size="19" font-weight="600" fill="#22322c">结构化校验</text><text x="554" y="197" font-size="14" fill="#5c6b62">不合格就重试</text></g>
-  <g>
-    <rect x="720" y="98" width="130" height="74" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="734" y="125" font-size="19" font-weight="600" fill="#22322c">降级</text><text x="734" y="149" font-size="14" fill="#5c6b62">兜底输出</text></g>
+    <rect x="72" y="106" width="232" height="210" rx="12" fill="#ffffff" stroke="#e2e8f0" filter="url(#cardShadow)"/>
+    <text x="92" y="136" font-size="13.5" font-weight="700" fill="#0f172a">双端交互入口</text>
+    <rect x="92" y="152" width="192" height="62" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="106" y="176" font-size="12.5" font-weight="600" fill="#0f172a">Vue 3 + TS 运营管理台</text>
+    <text x="106" y="196" font-size="11" fill="#64748b">活动配置 · 知识库 · RBAC 菜单</text>
+    <rect x="92" y="226" width="192" height="62" rx="8" fill="#fdf2f8" stroke="#fbcfe8"/>
+    <text x="106" y="250" font-size="12.5" font-weight="600" fill="#be185d">消费者移动端 H5</text>
+    <text x="106" y="270" font-size="11" fill="#9d174d">动态问答 · 3 风格种草笔记生成</text>
 
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M200 87 L260 120"/>
-    <polygon points="260,120 253.0,120.4 256.6,113.9" fill="#8a968e" stroke="none"/>
+    <rect x="322" y="106" width="486" height="210" rx="12" fill="#ffffff" stroke="#e2e8f0" filter="url(#cardShadow)"/>
+    <text x="344" y="136" font-size="13.5" font-weight="700" fill="#0f172a">FastAPI 大模型高可用输出守卫</text>
+    <rect x="344" y="156" width="138" height="90" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="360" y="182" font-size="12.5" font-weight="700" fill="#1d4ed8">3 风格并行导写</text>
+    <text x="360" y="204" font-size="11" fill="#1e40af">支持多轮历史上下文</text>
+    <text x="360" y="222" font-size="11" fill="#1e40af">与单篇重新生成</text>
+
+    <rect x="496" y="156" width="138" height="90" rx="10" fill="#fffbeb" stroke="#fde68a"/>
+    <text x="512" y="182" font-size="12.5" font-weight="700" fill="#b45309">Schema 强校验</text>
+    <text x="512" y="204" font-size="11" fill="#92400e">JSON 漂移自动捕获</text>
+    <text x="512" y="222" font-size="11" fill="#92400e">带错误提示自愈重试</text>
+
+    <rect x="648" y="156" width="138" height="90" rx="10" fill="#ecfdf5" stroke="#a7f3d0"/>
+    <text x="664" y="182" font-size="12.5" font-weight="700" fill="#047857">平滑保底降级</text>
+    <text x="664" y="204" font-size="11" fill="#065f46">模型超时/限流兜底</text>
+    <text x="664" y="222" font-size="11" fill="#065f46">C 端体验零白屏卡死</text>
+
+    <g>
+    <rect x="344" y="266" width="144.5" height="24" rx="12" fill="#f1f5f9"/>
+    <text x="416.25" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Docker 镜像构建</text>
   </g>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M200 183 L260 155"/>
-    <polygon points="260,155 256.2,160.9 253.1,154.1" fill="#8a968e" stroke="none"/>
+    <g>
+    <rect x="486" y="266" width="144.5" height="24" rx="12" fill="#f1f5f9"/>
+    <text x="558.25" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Harbor 仓库推送</text>
   </g>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M470 120 L540 87"/>
-    <polygon points="540,87 536.3,92.9 533.1,86.1" fill="#8a968e" stroke="none"/>
-  </g>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M540 124 L540 146"/>
-    <polygon points="540,146 536.2,140.1 543.8,140.1" fill="#8a968e" stroke="none"/>
-  </g>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M690 183 L720 150"/>
-    <polygon points="720,150 718.8,156.9 713.2,151.9" fill="#8a968e" stroke="none"/>
+    <g>
+    <rect x="630" y="266" width="167.5" height="24" rx="12" fill="#e0f2fe"/>
+    <text x="713.75" y="282" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0369a1">Kubernetes 联调</text>
   </g>
 
-  <rect x="30" y="270" width="820" height="130" rx="3" fill="#fffdf7" stroke="#c9c2b2"/>
-  <text x="48" y="298" font-size="14" fill="#22322c" text-anchor="start" font-weight="600">评论生成：长链路异步任务</text>
-  <g>
-    <rect x="48" y="314" width="64.4" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
-    <text x="80.2" y="331" font-size="13" fill="#5c6b62" text-anchor="middle">链接解析</text>
-  </g> <g>
-    <rect x="176" y="314" width="64.4" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
-    <text x="208.2" y="331" font-size="13" fill="#5c6b62" text-anchor="middle">内容缓存</text>
-  </g> <g>
-    <rect x="300" y="314" width="78" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
-    <text x="339" y="331" font-size="13" fill="#5c6b62" text-anchor="middle">知识库匹配</text>
-  </g> <g>
-    <rect x="450" y="314" width="78" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
-    <text x="489" y="331" font-size="13" fill="#5c6b62" text-anchor="middle">第三方回调</text>
+    <rect x="72" y="334" width="736" height="152" rx="12" fill="#0f172a" stroke="#1e293b" filter="url(#cardShadow)"/>
+    <text x="94" y="366" font-size="13.5" font-weight="600" fill="#f8fafc">长链路异步评论生成 · Redis 分布式锁防重</text>
+    <g>
+    <rect x="94" y="384" width="121.5" height="24" rx="12" fill="#1e293b"/>
+    <text x="154.75" y="400" text-anchor="middle" font-size="11.5" font-weight="600" fill="#93c5fd">1. 外部链接解析</text>
   </g>
-  <g stroke="#5c6b62" stroke-width="1.2" fill="none">
-    <path d="M160 326 L176 326"/>
-    <polygon points="176,326 170.1,329.8 170.1,322.2" fill="#5c6b62" stroke="none"/>
+    <g>
+    <rect x="242" y="384" width="121.5" height="24" rx="12" fill="#1e293b"/>
+    <text x="302.75" y="400" text-anchor="middle" font-size="11.5" font-weight="600" fill="#93c5fd">2. 内容提取缓存</text>
   </g>
-  <g stroke="#5c6b62" stroke-width="1.2" fill="none">
-    <path d="M288 326 L300 326"/>
-    <polygon points="300,326 294.1,329.8 294.1,322.2" fill="#5c6b62" stroke="none"/>
+    <g>
+    <rect x="390" y="384" width="133" height="24" rx="12" fill="#1e293b"/>
+    <text x="456.5" y="400" text-anchor="middle" font-size="11.5" font-weight="600" fill="#93c5fd">3. 品牌知识库匹配</text>
   </g>
-  <g stroke="#5c6b62" stroke-width="1.2" fill="none">
-    <path d="M438 326 L450 326"/>
-    <polygon points="450,326 444.1,329.8 444.1,322.2" fill="#5c6b62" stroke="none"/>
+    <g>
+    <rect x="554" y="384" width="156" height="24" rx="12" fill="#064e3b"/>
+    <text x="632" y="400" text-anchor="middle" font-size="11.5" font-weight="600" fill="#6ee7b7">4. 第三方回调幂等入库</text>
   </g>
-  <text x="48" y="372" font-size="12.5" fill="#5c6b62" text-anchor="start" font-weight="400">Redis 锁 + 恢复接口兜住重复执行；Docker → Harbor → Kubernetes 测试环境联调</text>
-
-  <text x="30" y="444" font-size="13" fill="#22322c" text-anchor="start" font-weight="400">结果：从活动配置到笔记与评论产出跑通一条链路，模型异常有降级路径</text>
+    <text x="94" y="454" font-size="12" fill="#cbd5e1">通过 Redis 锁与任务恢复接口拦截第三方重复回调，保障长耗时异步链路只落库唯一有效结果。</text>
   
   </g>
-  <text x="24" y="528" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#8a968e" letter-spacing="0.08em">飞鹤 KOS · LLM 输出进业务</text>
 </svg>

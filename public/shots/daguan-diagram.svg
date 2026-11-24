@@ -1,58 +1,81 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 550" width="880" height="550" role="img" aria-label="大观 · 授权推送与批量查询">
-  <rect width="880" height="550" fill="#fdf9ee"/>
-  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 550" width="880" height="550" role="img" aria-label="daguan-iam · Go 跨服务幂等授权与批量并发收敛">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ede9fe"/>
+      <stop offset="55%" stop-color="#e0f2fe"/>
+      <stop offset="100%" stop-color="#f0fdf4"/>
+    </linearGradient>
+    <filter id="winShadow" x="-8%" y="-6%" width="116%" height="120%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#0f172a" flood-opacity="0.13"/>
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+    <filter id="cardShadow" x="-6%" y="-6%" width="112%" height="118%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.05"/>
+    </filter>
+  </defs>
+
+  <!-- 柔和极光底衬 -->
+  <rect width="880" height="550" fill="url(#bg)"/>
+  <circle cx="760" cy="80" r="190" fill="#ffffff" opacity="0.38"/>
+  <circle cx="110" cy="470" r="160" fill="#ffffff" opacity="0.28"/>
+
+  <!-- 拟物浏览器主窗口 -->
+  <g filter="url(#winShadow)">
+    <rect x="46" y="38" width="788" height="474" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <!-- 顶栏 -->
+    <path d="M46 54 Q46 38 62 38 L818 38 Q834 38 834 54 L834 82 L46 82 Z" fill="#f8fafc"/>
+    <line x1="46" y1="82" x2="834" y2="82" stroke="#edf2f7" stroke-width="1"/>
+    <circle cx="72" cy="60" r="5.5" fill="#fb7185"/>
+    <circle cx="90" cy="60" r="5.5" fill="#fbbf24"/>
+    <circle cx="108" cy="60" r="5.5" fill="#34d399"/>
+
+    <!-- 地址栏 -->
+    <rect x="240" y="48" width="340" height="24" rx="6" fill="#ffffff" stroke="#e2e8f0"/>
+    <text x="410" y="64" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#64748b">daguan-iam · Go 跨服务幂等授权与批量并发收敛</text>
+
+    <!-- 右上状态胶囊 -->
+    <rect x="692" y="48" width="122" height="24" rx="12" fill="#4f46e5" fill-opacity="0.12"/>
+    <circle cx="707" cy="60" r="3.8" fill="#4f46e5"/>
+    <text x="717" y="64" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" font-weight="600" fill="#4f46e5">N+1 → 单次查询</text>
+  </g>
+
+  <!-- 窗口内容 -->
+  <g font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif">
     
-  <g>
-    <rect x="30" y="56" width="190" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="44" y="83" font-size="19" font-weight="600" fill="#22322c">租户授权推送</text><text x="44" y="107" font-size="14" fill="#5c6b62">跨服务调用</text></g>
-  <g>
-    <rect x="280" y="56" width="200" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="294" y="83" font-size="19" font-weight="600" fill="#22322c">任务快照</text><text x="294" y="107" font-size="14" fill="#5c6b62">记录这次要做什么</text></g>
-  <g>
-    <rect x="280" y="158" width="200" height="78" rx="3" fill="#fffdf7" stroke="#c2492c" stroke-width="1.4"/>
-    <text x="294" y="185" font-size="19" font-weight="600" fill="#22322c">幂等标识</text><text x="294" y="209" font-size="14" fill="#5c6b62">同一任务只执行一次</text></g>
-  <g>
-    <rect x="540" y="56" width="170" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="554" y="83" font-size="19" font-weight="600" fill="#22322c">事务</text><text x="554" y="107" font-size="14" fill="#5c6b62">本地变更原子提交</text></g>
-  <g>
-    <rect x="540" y="158" width="170" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="554" y="185" font-size="19" font-weight="600" fill="#22322c">持久化回执</text><text x="554" y="209" font-size="14" fill="#5c6b62">结果可查、可重放</text></g>
-  <g>
-    <rect x="740" y="56" width="110" height="78" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="754" y="83" font-size="19" font-weight="600" fill="#22322c">可重放</text><text x="754" y="107" font-size="14" fill="#5c6b62">未知结果</text></g>
+    <rect x="72" y="106" width="736" height="172" rx="12" fill="#ffffff" stroke="#e2e8f0" filter="url(#cardShadow)"/>
+    <text x="94" y="136" font-size="14" font-weight="700" fill="#0f172a">跨服务租户授权推送链路（安全重放四件套）</text>
 
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M220 95 L280 95"/>
-    <polygon points="280,95 274.1,98.8 274.1,91.2" fill="#8a968e" stroke="none"/>
-  </g>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M380 134 L380 158"/>
-    <polygon points="380,158 376.2,152.1 383.8,152.1" fill="#8a968e" stroke="none"/>
-  </g>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M480 95 L540 95"/>
-    <polygon points="540,95 534.1,98.8 534.1,91.2" fill="#8a968e" stroke="none"/>
-  </g>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M480 197 L540 197"/>
-    <polygon points="540,197 534.1,200.8 534.1,193.2" fill="#8a968e" stroke="none"/>
-  </g>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M710 95 L740 95"/>
-    <polygon points="740,95 734.1,98.8 734.1,91.2" fill="#8a968e" stroke="none"/>
-  </g>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M625 134 L625 158"/>
-    <polygon points="625,158 621.2,152.1 628.8,152.1" fill="#8a968e" stroke="none"/>
-  </g>
+    <rect x="94" y="156" width="154" height="92" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="112" y="184" font-size="13" font-weight="700" fill="#0f172a">1. 任务快照</text>
+    <text x="112" y="206" font-size="11.5" fill="#475569">固化授权变更输入</text>
+    <text x="112" y="225" font-size="11.5" fill="#475569">支持断点现场还原</text>
 
-  <rect x="30" y="286" width="820" height="94" rx="3" fill="#fffdf7" stroke="#c9c2b2"/>
-  <text x="48" y="314" font-size="14" fill="#22322c" text-anchor="start" font-weight="600">组织树：逐节点读取（N 次查询） → 一次管理关系查询 + 内存遍历</text>
-  <text x="48" y="340" font-size="12.5" fill="#5c6b62" text-anchor="start" font-weight="400">权限查询按每批 100 个组织执行，配有界并发与超时控制</text>
-  <text x="48" y="362" font-size="12.5" fill="#5c6b62" text-anchor="start" font-weight="400">补了权限接口与数据库迁移的回归测试</text>
+    <rect x="272" y="156" width="154" height="92" rx="10" fill="#eef2ff" stroke="#a5b4fc"/>
+    <text x="290" y="184" font-size="13" font-weight="700" fill="#4338ca">2. 幂等标识</text>
+    <text x="290" y="206" font-size="11.5" fill="#3730a3">唯一键防重校验</text>
+    <text x="290" y="225" font-size="11.5" fill="#3730a3">重复推送无副作用</text>
 
-  <text x="30" y="428" font-size="13" fill="#22322c" text-anchor="start" font-weight="400">结果：推送链路具备幂等语义，重复请求与未知结果都能安全重放</text>
+    <rect x="450" y="156" width="154" height="92" rx="10" fill="#f0fdf4" stroke="#86efac"/>
+    <text x="468" y="184" font-size="13" font-weight="700" fill="#15803d">3. 本地事务</text>
+    <text x="468" y="206" font-size="11.5" fill="#166534">PostgreSQL 原子提交</text>
+    <text x="468" y="225" font-size="11.5" fill="#166534">杜绝半成品脏权限</text>
+
+    <rect x="628" y="156" width="158" height="92" rx="10" fill="#fffbeb" stroke="#fcd34d"/>
+    <text x="646" y="184" font-size="13" font-weight="700" fill="#b45309">4. 持久化回执</text>
+    <text x="646" y="206" font-size="11.5" fill="#92400e">超时未知结果可查</text>
+    <text x="646" y="225" font-size="11.5" fill="#92400e">支持放心自动重放</text>
+
+    <rect x="72" y="298" width="358" height="188" rx="12" fill="#fff1f2" stroke="#fecdd3" filter="url(#cardShadow)"/>
+    <text x="94" y="328" font-size="13.5" font-weight="700" fill="#be123c">重构前：逐节点递归读取 (N+1)</text>
+    <text x="94" y="356" font-size="12" fill="#881337">• 每展开一层组织树发起一次 DB 查询</text>
+    <text x="94" y="380" font-size="12" fill="#881337">• 大租户鉴权瞬间放大为上百次串行请求</text>
+    <text x="94" y="404" font-size="12" fill="#881337">• 网络超时后状态不明，不敢盲目重试</text>
+
+    <rect x="450" y="298" width="358" height="188" rx="12" fill="#ecfdf5" stroke="#a7f3d0" filter="url(#cardShadow)"/>
+    <text x="472" y="328" font-size="13.5" font-weight="700" fill="#047857">重构后：单次查询 + 分批有界并发</text>
+    <text x="472" y="356" font-size="12" fill="#065f46">• 一次拉取管理关系表 + 内存高速构树遍历</text>
+    <text x="472" y="380" font-size="12" fill="#065f46">• 权限按每批 100 个组织切片 + 有界并发池</text>
+    <text x="472" y="404" font-size="12" fill="#065f46">• 统一超时控制 + 数据库迁移回归测试覆盖</text>
   
   </g>
-  <text x="24" y="528" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#8a968e" letter-spacing="0.08em">大观 · 授权推送与批量查询</text>
 </svg>

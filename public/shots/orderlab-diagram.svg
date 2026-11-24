@@ -1,66 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 550" width="880" height="550" role="img" aria-label="订单可靠性实验 · 故障注入">
-  <rect width="880" height="550" fill="#fdf9ee"/>
-  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 550" width="880" height="550" role="img" aria-label="order-reliability-lab · Go 1.24 + goqite 故障注入演练">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e0e7ff"/>
+      <stop offset="55%" stop-color="#ecfeff"/>
+      <stop offset="100%" stop-color="#f0fdf4"/>
+    </linearGradient>
+    <filter id="winShadow" x="-8%" y="-6%" width="116%" height="120%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#0f172a" flood-opacity="0.13"/>
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+    <filter id="cardShadow" x="-6%" y="-6%" width="112%" height="118%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.05"/>
+    </filter>
+  </defs>
+
+  <!-- 柔和极光底衬 -->
+  <rect width="880" height="550" fill="url(#bg)"/>
+  <circle cx="760" cy="80" r="190" fill="#ffffff" opacity="0.38"/>
+  <circle cx="110" cy="470" r="160" fill="#ffffff" opacity="0.28"/>
+
+  <!-- 拟物浏览器主窗口 -->
+  <g filter="url(#winShadow)">
+    <rect x="46" y="38" width="788" height="474" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <!-- 顶栏 -->
+    <path d="M46 54 Q46 38 62 38 L818 38 Q834 38 834 54 L834 82 L46 82 Z" fill="#f8fafc"/>
+    <line x1="46" y1="82" x2="834" y2="82" stroke="#edf2f7" stroke-width="1"/>
+    <circle cx="72" cy="60" r="5.5" fill="#fb7185"/>
+    <circle cx="90" cy="60" r="5.5" fill="#fbbf24"/>
+    <circle cx="108" cy="60" r="5.5" fill="#34d399"/>
+
+    <!-- 地址栏 -->
+    <rect x="240" y="48" width="340" height="24" rx="6" fill="#ffffff" stroke="#e2e8f0"/>
+    <text x="410" y="64" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" fill="#64748b">order-reliability-lab · Go 1.24 + goqite 故障注入演练</text>
+
+    <!-- 右上状态胶囊 -->
+    <rect x="692" y="48" width="122" height="24" rx="12" fill="#0d9488" fill-opacity="0.12"/>
+    <circle cx="707" cy="60" r="3.8" fill="#0d9488"/>
+    <text x="717" y="64" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" font-weight="600" fill="#0d9488">CI Drills Passing</text>
+  </g>
+
+  <!-- 窗口内容 -->
+  <g font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif">
     
-  <g>
-    <rect x="40" y="200" width="150" height="76" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="54" y="227" font-size="19" font-weight="600" fill="#22322c">下单</text><text x="54" y="251" font-size="14" fill="#5c6b62">HTTP 入口</text></g>
-  <g>
-    <rect x="240" y="200" width="170" height="76" rx="3" fill="#fffdf7" stroke="#c2492c" stroke-width="1.4"/>
-    <text x="254" y="227" font-size="19" font-weight="600" fill="#22322c">goqite 队列</text><text x="254" y="251" font-size="14" fill="#5c6b62">SQLite 支撑</text></g>
-  <g>
-    <rect x="460" y="200" width="150" height="76" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="474" y="227" font-size="19" font-weight="600" fill="#22322c">消费</text><text x="474" y="251" font-size="14" fill="#5c6b62">重试 / 幂等</text></g>
-  <g>
-    <rect x="660" y="200" width="180" height="76" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
-    <text x="674" y="227" font-size="19" font-weight="600" fill="#22322c">状态落库</text><text x="674" y="251" font-size="14" fill="#5c6b62">可对照的终态</text></g>
+    <rect x="72" y="112" width="736" height="168" rx="12" fill="#0f172a" stroke="#1e293b" filter="url(#cardShadow)"/>
+    <text x="96" y="144" font-family="ui-monospace, Consolas, monospace" font-size="13" font-weight="600" fill="#5eead4">$ go test -v ./internal/lab/... -run TestOrderFaultDrills</text>
+    <text x="96" y="176" font-family="ui-monospace, Consolas, monospace" font-size="12" fill="#cbd5e1">=== RUN   TestDuplicateSubmissionIdempotency   --- PASS (0.04s)</text>
+    <text x="96" y="202" font-family="ui-monospace, Consolas, monospace" font-size="12" fill="#cbd5e1">=== RUN   TestDownstreamTimeoutAndSafeReplay   --- PASS (0.11s)</text>
+    <text x="96" y="228" font-family="ui-monospace, Consolas, monospace" font-size="12" fill="#cbd5e1">=== RUN   TestWorkerCrashRecoveryConsistency   --- PASS (0.09s)</text>
+    <text x="96" y="256" font-family="ui-monospace, Consolas, monospace" font-size="12" fill="#34d399">PASS · 双 SQLite 隔离模拟应用库与下游账本，全部终态对账一致</text>
 
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M190 238 L240 238"/>
-    <polygon points="240,238 234.1,241.8 234.1,234.2" fill="#8a968e" stroke="none"/>
+    <rect x="72" y="302" width="736" height="180" rx="12" fill="#ffffff" stroke="#e2e8f0" filter="url(#cardShadow)"/>
+    <text x="96" y="334" font-size="14" font-weight="700" fill="#0f172a">实验设计：把「消息队列会重试」拆成可量化的故障注入矩阵</text>
+    <g>
+    <rect x="96" y="356" width="87" height="24" rx="12" fill="#e0f2fe"/>
+    <text x="139.5" y="372" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0369a1">幂等键防双花</text>
   </g>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M410 238 L460 238"/>
-    <polygon points="460,238 454.1,241.8 454.1,234.2" fill="#8a968e" stroke="none"/>
+    <g>
+    <rect x="228" y="356" width="121.5" height="24" rx="12" fill="#fef3c7"/>
+    <text x="288.75" y="372" text-anchor="middle" font-size="11.5" font-weight="600" fill="#b45309">提交超时未知态恢复</text>
   </g>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M610 238 L660 238"/>
-    <polygon points="660,238 654.1,241.8 654.1,234.2" fill="#8a968e" stroke="none"/>
+    <g>
+    <rect x="398" y="356" width="87" height="24" rx="12" fill="#ede9fe"/>
+    <text x="441.5" y="372" text-anchor="middle" font-size="11.5" font-weight="600" fill="#5b21b6">重复消息投递</text>
   </g>
-
-  <g>
-    <rect x="240" y="96" width="64.4" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
-    <text x="272.2" y="113" font-size="13" fill="#5c6b62" text-anchor="middle">重复投递</text>
-  </g> <g>
-    <rect x="400" y="96" width="37.2" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
-    <text x="418.6" y="113" font-size="13" fill="#5c6b62" text-anchor="middle">超时</text>
-  </g> <g>
-    <rect x="520" y="96" width="64.4" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
-    <text x="552.2" y="113" font-size="13" fill="#5c6b62" text-anchor="middle">进程重启</text>
+    <g>
+    <rect x="538" y="356" width="213.5" height="24" rx="12" fill="#dcfce7"/>
+    <text x="644.75" y="372" text-anchor="middle" font-size="11.5" font-weight="600" fill="#15803d">PROVENANCE 诚实边界标注</text>
   </g>
-  <g stroke="#c2492c" stroke-width="1.2" fill="none">
-    <path d="M300 120 L320 200" stroke-dasharray="5 5"/>
-    <polygon points="320,200 314.9,195.2 322.2,193.4" fill="#c2492c" stroke="none"/>
-  </g>
-  <g stroke="#c2492c" stroke-width="1.2" fill="none">
-    <path d="M424 120 L420 200" stroke-dasharray="5 5"/>
-    <polygon points="420,200 416.5,193.9 424.0,194.3" fill="#c2492c" stroke="none"/>
-  </g>
-  <g stroke="#c2492c" stroke-width="1.2" fill="none">
-    <path d="M548 120 L500 200" stroke-dasharray="5 5"/>
-    <polygon points="500,200 499.8,193.0 506.3,196.9" fill="#c2492c" stroke="none"/>
-  </g>
-
-  <rect x="240" y="330" width="600" height="86" rx="3" fill="#fffdf7" stroke="#c9c2b2"/>
-  <text x="258" y="358" font-size="13" fill="#22322c" text-anchor="start" font-weight="600">故障注入测试：把「出错时会发生什么」变成可重复执行的实验</text>
-  <text x="258" y="382" font-size="12.5" fill="#5c6b62" text-anchor="start" font-weight="400">每次跑完记录实际行为，对照自己对重试与幂等的判断</text>
-  <g stroke="#8a968e" stroke-width="1.2" fill="none">
-    <path d="M380 276 L380 330" stroke-dasharray="5 5"/>
-    <polygon points="380,330 376.2,324.1 383.8,324.1" fill="#8a968e" stroke="none"/>
-  </g>
-
-  <text x="40" y="452" font-size="12" fill="#8a968e" text-anchor="start" font-weight="400">学习项目，不是线上系统；README 标注了 AI 辅助脚手架的范围</text>
+    <text x="96" y="424" font-size="12.5" fill="#475569">基于 maragudk/goqite 构建零外部依赖本地可靠性演练场，GitHub Actions 每次提交自动执行全量故障测试。</text>
   
   </g>
-  <text x="24" y="528" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#8a968e" letter-spacing="0.08em">订单可靠性实验 · 故障注入</text>
 </svg>

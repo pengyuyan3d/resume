@@ -1,76 +1,93 @@
 ﻿---
 import { siteConfig } from "../../config";
 import { zones } from "../../portfolio";
-import islandSvg from "../../../public/island.svg?raw";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <section class="stage" id="island">
+  <div class="stage-glow stage-glow-1" aria-hidden="true"></div>
+  <div class="stage-glow stage-glow-2" aria-hidden="true"></div>
+
   <div class="stage-inner">
     <div class="stage-copy">
-      <p class="stage-kicker">{siteConfig.name} · 产品型全栈开发工程师</p>
+      <div class="status-pill">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>{siteConfig.name} · 产品型全栈开发 · 北京随时到岗</span>
+      </div>
+
       <h1 class="stage-title">雨岛</h1>
 
-      <p class="stage-lede">从后端容错到客户端与 3D 交互，一人闭环跑通上线。</p>
+      <p class="stage-lede">
+        从后端容错、大模型落地到客户端与 3D 交互，一人闭环跑通上线。
+      </p>
       <p class="stage-desc">
-        Python / FastAPI · Go · Vue 3 / React · Flutter · Three.js 与企业级 LLM 工程化落地。
-        点开海图建筑或下方卡片，查看每个项目的真实问题、做法与可核验结果。
+        主攻 <strong>Python / FastAPI · Go · Vue 3 / React · Flutter · Three.js</strong>。
+        转动右侧的浮空雨岛或点击下方代表作，查看每个项目解决的真实边界问题与可核验结果。
       </p>
 
-      <ul class="stage-proofs" aria-label="核心背景速览">
-        <li>国家奖学金 · 专业 Top 5%</li>
-        <li>省数学竞赛一等奖</li>
-        <li>企业级 AI 全栈交付</li>
-        <li>2026 届 · 北京随时到岗</li>
-      </ul>
+      <div class="proof-pills" aria-label="核心荣誉与背景">
+        <span class="proof-pill">国家奖学金</span>
+        <span class="proof-pill">专业排名 Top 5%</span>
+        <span class="proof-pill">省数学竞赛一等奖</span>
+        <span class="proof-pill">企业级 AI 全栈交付</span>
+      </div>
 
       <div class="stage-actions">
         <a class="btn btn-primary" href="#works">体验线上代表作</a>
-        <button class="btn btn-ghost" type="button" data-zone="work">企业交付经历</button>
-        <a class="btn btn-ghost" href={`${base}/resume.pdf`} download>下载一页 PDF</a>
+        <button class="btn btn-glass" type="button" data-zone="work">企业交付经历</button>
+        <a class="btn btn-glass" href={`${base}/resume.pdf`} download>下载一页简历 PDF</a>
       </div>
     </div>
 
-    <figure class="plate">
-      <div class="plate-frame">
-        <div class="island-svg" set:html={islandSvg} />
+    <div class="diorama-stage" id="diorama-container">
+      <div class="diorama-halo" aria-hidden="true"></div>
+      <canvas id="island-canvas" aria-label="雨岛 3D 浮空微缩世界：可拖拽旋转并点击建筑查看详情"></canvas>
+
+      <div class="diorama-markers">
         {
           zones.map((z) => (
             <button
-              class="marker"
+              class="marker3d"
               type="button"
               data-zone={z.id}
-              data-place={z.place}
-              style={`left:${z.x}%;top:${z.y}%`}
+              data-marker3d={z.id}
               aria-controls={`panel-${z.id}`}
               aria-expanded="false"
             >
-              <span class="marker-dot" aria-hidden="true"><i>{z.name}</i></span>
-              <span class="marker-label">
-                <span class="marker-title">{z.name}</span>
-                <span class="marker-sub">{z.hoverHint}</span>
+              <span class="marker3d-dot" aria-hidden="true" />
+              <span class="marker3d-body">
+                <span class="marker3d-title">{z.name}</span>
+                <span class="marker3d-sub">{z.hoverHint}</span>
               </span>
             </button>
           ))
         }
       </div>
-      <figcaption class="plate-caption">
-        <span>雨岛 · 点击建筑或路标直达抽屉（支持数字键 1–4）</span>
-        <span>39.9°N 116.4°E</span>
-      </figcaption>
-    </figure>
+
+      <div class="diorama-hint" aria-hidden="true">
+        <span>拖拽旋转 3D 浮空岛 · 点击建筑或数字键 1–4 展开</span>
+        <span class="diorama-coord">39.9°N · 116.4°E</span>
+      </div>
+    </div>
   </div>
 
-  <nav class="index-bar" aria-label="基点导航">
-    {
-      zones.map((z) => (
-        <button class="index-item" type="button" data-zone={z.id} aria-controls={`panel-${z.id}`} aria-expanded="false">
-          <span class="index-name">{z.name}</span>
-          <span class="index-hint">{z.short}</span>
-        </button>
-      ))
-    }
-    <a class="index-cta" href={`${base}/resume.pdf`} download>下载一页 PDF</a>
-  </nav>
+  <div class="dock-wrap">
+    <nav class="glass-dock" aria-label="基点导航">
+      {
+        zones.map((z, idx) => (
+          <button class="dock-item" type="button" data-zone={z.id} aria-controls={`panel-${z.id}`} aria-expanded="false">
+            <span class="dock-num">0{idx + 1}</span>
+            <span class="dock-text">
+              <span class="dock-name">{z.name}</span>
+              <span class="dock-hint">{z.short}</span>
+            </span>
+          </button>
+        ))
+      }
+      <a class="dock-cta" href={`${base}/resume.pdf`} download>
+        一页简历 PDF ↓
+      </a>
+    </nav>
+  </div>
 </section>
