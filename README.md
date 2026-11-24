@@ -1,14 +1,12 @@
 ﻿# resume
 
-张雨的求职站：一张阳光下的雨岛插画地图 + 一页 A4 简历。暖米色纸面、蓝绿海水、沙岸、树和小房子。
+张雨的个人作品集与在线简历：**产品型全栈开发工程师（AI 应用与产品闭环）**。晴天手绘等距活海图 + 主次三层作品集 + 实时同步的一页超链接 PDF。
 
-- **作品集（首页）**：<https://pengyuyan3d.github.io/resume/>
+- **雨岛作品集（首页）**：<https://pengyuyan3d.github.io/resume/>
 - **长版简历**：<https://pengyuyan3d.github.io/resume/profile/>
-- **一页 PDF**：<https://pengyuyan3d.github.io/resume/resume.pdf>
+- **一页 PDF（含可点击作品集与在线 Demo 入口）**：<https://pengyuyan3d.github.io/resume/resume.pdf>
 
-> 推 `main` 后由 GitHub Actions 自动发布，约 1 分钟生效。
-
-![首页](./preview-island.png)
+> 推 `main` 后由 GitHub Actions 自动构建并在 CI 内实时渲染生成最新 `resume.pdf`，约 1 分钟生效。
 
 ## 三个页面
 

@@ -154,8 +154,8 @@ function lighthouse() {
     <rect x="${x - 13}" y="${top + 2}" width="26" height="8" rx="2" fill="#4a5a63"/>
     <circle cx="${x}" cy="${top + 6}" r="5.5" fill="#ffd479"/>
     <path d="M${x - 14} ${top + 2} L${x} ${top - 16} L${x + 14} ${top + 2} Z" fill="#e05a3a"/>
-    <path d="M${x} ${top + 6} L${x - 40} ${top - 18} L${x - 40} ${top + 12} Z" fill="#ffe7a8" opacity=".22"/>
-    <path d="M${x} ${top + 6} L${x + 40} ${top - 18} L${x + 40} ${top + 12} Z" fill="#ffe7a8" opacity=".22"/>
+    <path class="beam" d="M${x} ${top + 6} L${x - 40} ${top - 18} L${x - 40} ${top + 12} Z" fill="#ffe7a8" opacity=".22"/>
+    <path class="beam" d="M${x} ${top + 6} L${x + 40} ${top - 18} L${x + 40} ${top + 12} Z" fill="#ffe7a8" opacity=".22"/>
   </g>`;
   return s;
 }
@@ -231,8 +231,14 @@ function scene() {
       .smoke circle { opacity: 0; animation: rise 6s ease-out infinite; }
       .smoke circle:nth-child(2) { animation-delay: 2s; }
       .smoke circle:nth-child(3) { animation-delay: 4s; }
-      @keyframes rise { 0% { opacity: 0; transform: translate(0,6px) scale(.6) } 30% { opacity: .5 } 100% { opacity: 0; transform: translate(10px,-26px) scale(1.4) } }
-      @media (prefers-reduced-motion: reduce) { .smoke circle { animation: none; opacity: .35 } }
+      .beam { animation: pulseBeam 5.4s ease-in-out infinite; transform-origin: 550px 196px; }
+      .boat { animation: bobBoat 5.8s ease-in-out infinite; }
+      .map-bldg { cursor: pointer; transition: transform .28s cubic-bezier(.2,.7,.2,1), filter .28s ease; }
+      .map-bldg:hover, .map-bldg.is-active { transform: translateY(-4px); filter: drop-shadow(0 8px 10px rgba(201,85,61,.32)); }
+      @keyframes rise { 0% { opacity: 0; transform: translate(0,6px) scale(.6) } 30% { opacity: .55 } 100% { opacity: 0; transform: translate(10px,-26px) scale(1.4) } }
+      @keyframes pulseBeam { 0%, 100% { opacity: .18 } 50% { opacity: .38 } }
+      @keyframes bobBoat { 0%, 100% { transform: translate(326px, 578px) } 50% { transform: translate(330px, 575px) } }
+      @media (prefers-reduced-motion: reduce) { .smoke circle, .beam, .boat { animation: none; } .smoke circle { opacity: .35 } }
     </style>
   </defs>
 
@@ -268,10 +274,10 @@ function scene() {
 
   ${trees}
 
-  ${harbor()}
-  ${workshop()}
-  ${lighthouse()}
-  ${camp()}
+  <g class="map-bldg" data-zone="work" role="button" aria-label="打开工作港">${harbor()}</g>
+  <g class="map-bldg" data-zone="build" role="button" aria-label="打开项目工坊">${workshop()}</g>
+  <g class="map-bldg" data-zone="campus" role="button" aria-label="打开校园灯塔">${lighthouse()}</g>
+  <g class="map-bldg" data-zone="camp" role="button" aria-label="打开内容营地">${camp()}</g>
 
   <g fill="#e08a5a" opacity=".75">
     <circle cx="560" cy="556" r="2.2"/><circle cx="568" cy="550" r="1.8"/><circle cx="575" cy="558" r="2"/>
@@ -291,7 +297,7 @@ function scene() {
   ${person(864, 492, 0.86, "#e0a13a", true)}
 
   <!-- 小船 -->
-  <g transform="translate(326 578)">
+  <g class="boat" transform="translate(326 578)">
     <ellipse cx="0" cy="6" rx="26" ry="6" fill="#2f9c9b" opacity=".18"/>
     <path d="M-24 -2 Q0 12 24 -2 Q4 6 0 6 Q-4 6 -24 -2 Z" fill="#c9a670"/>
     <path d="M0 -4 L0 -30" stroke="#a87c4f" stroke-width="2"/>

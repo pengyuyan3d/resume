@@ -8,6 +8,18 @@ const work = byId("work");
 const build = byId("build");
 const light = byId("campus");
 const camp = byId("camp");
+
+const shortNames: Record<string, string> = {
+  "audit-pilot": "智审领航",
+  "3d-content-kit": "3D工厂",
+  "cip-workbench": "CIP工作台",
+  "daguan-iam": "大观IAM",
+  "feihe-kos": "飞鹤KOS",
+  "textbook3d": "课本3D",
+  "miaoban": "喵伴",
+  "fangcun": "方寸",
+  "order-reliability-lab": "订单实验",
+};
 ---
 
 <div class="scrim" data-close-panel aria-hidden="true"></div>
@@ -15,7 +27,13 @@ const camp = byId("camp");
 <!-- 01 工作港 -->
 <section class="panel" id="panel-work" data-panel="work" role="dialog" aria-modal="true" aria-labelledby="panel-work-title" tabindex="-1">
   <header class="panel-head">
-    <p class="panel-no">{work.no} · {work.en}</p>
+    <nav class="panel-tabs" aria-label="切换基点">
+      {zones.map((z) => (
+        <button type="button" class={`panel-tab${z.id === "work" ? " is-active" : ""}`} data-zone={z.id}>
+          {z.name}
+        </button>
+      ))}
+    </nav>
     <h2 class="panel-title" id="panel-work-title">{work.name}</h2>
     <p class="panel-sub">{work.tagline}</p>
     <button class="panel-close" type="button" data-close-panel aria-label="关闭">
@@ -26,7 +44,7 @@ const camp = byId("camp");
   </header>
   <div class="panel-body">
     <p class="panel-sub" style="margin:0 0 20px">
-      两段实习 + 一段正式，从 Go / Python 后端一路做到 Flutter 客户端接入。
+      覆盖 Python / Go 后端服务、Vue 3 / React Web 前端与 Flutter 移动端客户端的端到端研发落地。
     </p>
 
     {
@@ -37,7 +55,6 @@ const camp = byId("camp");
               <h3 class="entry-title">{job.title}</h3>
               <p class="entry-org">{job.company}</p>
             </div>
-            <span class="entry-time">{job.dateRange}</span>
           </div>
           <ul class="entry-list">
             {job.bullets.map((b) => <li>{b}</li>)}
@@ -47,12 +64,10 @@ const camp = byId("camp");
     }
 
     <div class="tags" style="margin-top:18px">
-      {["Python / FastAPI", "Go / Gin", "Vue 3 / TS", "Flutter", "PostgreSQL", "Redis", "Docker / K8s"].map((t) => (
-        <span class="tag">{t}</span>
-      ))}
+      {siteConfig.skills.map((t) => <span class="tag">{t}</span>)}
     </div>
     <p class="note">
-      经历与简历原文一致，没有放大年限：实际是 2026 届 + 约 7 个月实习/正式。企业项目无公网 Demo，面试时可展开到具体接口、故障复现步骤与测试。
+      企业生产系统无公网入口；面试时可围绕流式状态机、游标增量恢复、跨服务幂等回执与异步任务防重展开具体代码路径与测试用例。
     </p>
   </div>
 </section>
@@ -60,7 +75,13 @@ const camp = byId("camp");
 <!-- 02 项目工坊 -->
 <section class="panel" id="panel-build" data-panel="build" role="dialog" aria-modal="true" aria-labelledby="panel-build-title" tabindex="-1">
   <header class="panel-head">
-    <p class="panel-no">{build.no} · {build.en}</p>
+    <nav class="panel-tabs" aria-label="切换基点">
+      {zones.map((z) => (
+        <button type="button" class={`panel-tab${z.id === "build" ? " is-active" : ""}`} data-zone={z.id}>
+          {z.name}
+        </button>
+      ))}
+    </nav>
     <h2 class="panel-title" id="panel-build-title">{build.name}</h2>
     <p class="panel-sub">{build.tagline}</p>
     <button class="panel-close" type="button" data-close-panel aria-label="关闭">
@@ -70,20 +91,47 @@ const camp = byId("camp");
     </button>
   </header>
   <div class="panel-body">
-    <p class="panel-sub" style="margin:0 0 18px">
-      每个作品按「问题 → 做法 → 结果」写，能点开的都放了链接。
-    </p>
+    <nav class="case-toc" aria-label="项目快速定位">
+      {works.map((w) => (
+        <button type="button" class="toc-chip" data-jump={`case-${w.slug}`}>
+          {shortNames[w.slug] ?? w.name}
+        </button>
+      ))}
+    </nav>
 
     {
       works.map((w) => (
-        <article class="case">
+        <article class="case" id={`case-${w.slug}`}>
           {w.cover && (
             <div class="case-cover">
-              <img src={`${base}/${w.cover.src}`} alt={w.cover.alt} width="880" height="550" />
+              <button
+                type="button"
+                class="zoom-trigger"
+                data-zoom-src={`${base}/${w.cover.src}`}
+                data-zoom-alt={w.cover.alt}
+                aria-label={`放大查看 ${w.name} 架构与界面图`}
+              >
+                <img src={`${base}/${w.cover.src}`} alt={w.cover.alt} width="880" height="550" />
+                <span class="zoom-hint">点击放大</span>
+              </button>
             </div>
           )}
+          <span class="case-role">{w.role}</span>
           <h3>{w.name}</h3>
           <p class="case-line">{w.line}</p>
+
+          {w.beforeAfter && (
+            <div class="ba-box">
+              <div class="ba-item is-before">
+                <span>痛点边界</span>
+                <p>{w.beforeAfter.before.replace(/^改动前：/, "")}</p>
+              </div>
+              <div class="ba-item is-after">
+                <span>工程收敛</span>
+                <p>{w.beforeAfter.after.replace(/^改动后：/, "")}</p>
+              </div>
+            </div>
+          )}
 
           <div class="case-block">
             <h4>问题</h4>
@@ -109,9 +157,6 @@ const camp = byId("camp");
               {w.links.map((l) => (
                 <a class="link" href={l.href} target="_blank" rel="noopener noreferrer">
                   {l.label}
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M14 4h6v6M20 4 10 14M18 14v6H4V6h6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
                 </a>
               ))}
             </div>
@@ -127,7 +172,13 @@ const camp = byId("camp");
 <!-- 03 校园灯塔 -->
 <section class="panel" id="panel-campus" data-panel="campus" role="dialog" aria-modal="true" aria-labelledby="panel-campus-title" tabindex="-1">
   <header class="panel-head">
-    <p class="panel-no">{light.no} · {light.en}</p>
+    <nav class="panel-tabs" aria-label="切换基点">
+      {zones.map((z) => (
+        <button type="button" class={`panel-tab${z.id === "campus" ? " is-active" : ""}`} data-zone={z.id}>
+          {z.name}
+        </button>
+      ))}
+    </nav>
     <h2 class="panel-title" id="panel-campus-title">{light.name}</h2>
     <p class="panel-sub">{light.tagline}</p>
     <button class="panel-close" type="button" data-close-panel aria-label="关闭">
@@ -160,8 +211,8 @@ const camp = byId("camp");
     </div>
 
     <div class="case-block" style="margin-top:22px">
-      <h4>这盏灯现在照在哪</h4>
-      <p style="font-size:14px;line-height:1.9;color:var(--color-muted)">
+      <h4>数学训练落进工程里</h4>
+      <p style="font-size:14px;line-height:1.9;color:rgba(34,50,44,.72)">
         {campus.story}
       </p>
     </div>
@@ -171,7 +222,13 @@ const camp = byId("camp");
 <!-- 04 内容营地 -->
 <section class="panel" id="panel-camp" data-panel="camp" role="dialog" aria-modal="true" aria-labelledby="panel-camp-title" tabindex="-1">
   <header class="panel-head">
-    <p class="panel-no">{camp.no} · {camp.en}</p>
+    <nav class="panel-tabs" aria-label="切换基点">
+      {zones.map((z) => (
+        <button type="button" class={`panel-tab${z.id === "camp" ? " is-active" : ""}`} data-zone={z.id}>
+          {z.name}
+        </button>
+      ))}
+    </nav>
     <h2 class="panel-title" id="panel-camp-title">{camp.name}</h2>
     <p class="panel-sub">{camp.tagline}</p>
     <button class="panel-close" type="button" data-close-panel aria-label="关闭">
@@ -184,8 +241,8 @@ const camp = byId("camp");
     <div class="entry is-hi" style="padding-bottom:18px">
       <div class="entry-top">
         <div>
-          <h3 class="entry-title">现在：2026 届，可立即到岗</h3>
-          <p class="entry-org">只投北京 · 求职方向：AI 应用 / Python 后端 / 全栈</p>
+          <h3 class="entry-title">当前状态：2026 届，北京可立即到岗</h3>
+          <p class="entry-org">求职方向：产品型全栈开发 / 企业级 AI 应用 / Python·Go 后端</p>
         </div>
       </div>
     </div>
@@ -202,13 +259,13 @@ const camp = byId("camp");
     </div>
 
     <div class="case-block" style="margin-top:26px">
-      <h4>能翻的仓库</h4>
+      <h4>公开源码仓库</h4>
       <div style="display:grid;gap:10px">
         {
           repos.map((r) => (
             <a class="fact" href={r.href} target="_blank" rel="noopener noreferrer" style="display:block">
               <span style="font-weight:700;font-size:14px">{r.name}</span>
-              <p style="margin:6px 0 0;font-size:12.5px;line-height:1.7;color:var(--color-muted)">{r.desc}</p>
+              <p style="margin:6px 0 0;font-size:12.5px;line-height:1.7;color:rgba(34,50,44,.65)">{r.desc}</p>
             </a>
           ))
         }
@@ -217,7 +274,13 @@ const camp = byId("camp");
 
     <div class="links" style="margin-top:26px">
       <a class="btn btn-primary" href={`${base}/resume.pdf`} download>下载一页 PDF</a>
-      <a class="btn" href={`${base}/profile/`}>看长版简历</a>
+      <a class="btn" href={`${base}/profile/`}>查看长版简历</a>
     </div>
   </div>
 </section>
+
+<!-- 高清配图灯箱 -->
+<dialog id="img-lightbox" class="lightbox" aria-label="配图放大预览">
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="关闭大图">关闭 ×</button>
+  <img id="lightbox-img" alt="配图预览" hidden />
+</dialog>

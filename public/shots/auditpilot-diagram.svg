@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 550" width="880" height="550" role="img" aria-label="AuditPilot · 确定性算账 + 混合溯源 + 零泄露网关">
+  <rect width="880" height="550" fill="#fdf9ee"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    
+  <g>
+    <rect x="30" y="52" width="180" height="76" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="44" y="79" font-size="19" font-weight="600" fill="#22322c">财务流水 / 账套</text><text x="44" y="103" font-size="14" fill="#5c6b62">L1 确定性算子筛查</text></g>
+  <g>
+    <rect x="30" y="148" width="180" height="76" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="44" y="175" font-size="19" font-weight="600" fill="#22322c">采购合同 PDF</text><text x="44" y="199" font-size="14" fill="#5c6b62">BM25 + Dense RRF</text></g>
+  <g>
+    <rect x="270" y="52" width="230" height="76" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="284" y="79" font-size="19" font-weight="600" fill="#22322c">SQLite 只读沙箱</text><text x="284" y="103" font-size="14" fill="#5c6b62">Authorizer 底层防注入</text></g>
+  <g>
+    <rect x="270" y="148" width="230" height="76" rx="3" fill="#fffdf7" stroke="#c9c2b2" stroke-width="1"/>
+    <text x="284" y="175" font-size="19" font-weight="600" fill="#22322c">条款级溯源核验</text><text x="284" y="199" font-size="14" fill="#5c6b62">精确到合同号 · 条款号</text></g>
+  <g>
+    <rect x="560" y="96" width="290" height="92" rx="3" fill="#fffdf7" stroke="#c2492c" stroke-width="1.4"/>
+    <text x="574" y="123" font-size="19" font-weight="600" fill="#22322c">归一化脱敏网关 + LangGraph</text><text x="574" y="147" font-size="14" fill="#5c6b62">多格式账号一致占位 · 流式还原</text><text x="574" y="166" font-size="14" fill="#5c6b62">主备模型降级 · TTL 缓存加速</text></g>
+
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M210 90 L270 90"/>
+    <polygon points="270,90 264.1,93.8 264.1,86.2" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M210 186 L270 186"/>
+    <polygon points="270,186 264.1,189.8 264.1,182.2" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M500 90 L560 128"/>
+    <polygon points="560,128 553.0,128.0 557.0,121.7" fill="#8a968e" stroke="none"/>
+  </g>
+  <g stroke="#8a968e" stroke-width="1.2" fill="none">
+    <path d="M500 186 L560 158"/>
+    <polygon points="560,158 556.2,163.9 553.1,157.1" fill="#8a968e" stroke="none"/>
+  </g>
+
+  <rect x="30" y="274" width="820" height="118" rx="3" fill="#fffdf7" stroke="#c9c2b2"/>
+  <text x="48" y="304" font-size="15" fill="#22322c" text-anchor="start" font-weight="600">自动化评测基准：12 / 12 用例 100% 通过</text>
+  <g>
+    <rect x="48" y="322" width="91.6" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
+    <text x="93.8" y="339" font-size="13" fill="#5c6b62" text-anchor="middle">拆分付款检出</text>
+  </g> <g>
+    <rect x="178" y="322" width="118.8" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
+    <text x="237.4" y="339" font-size="13" fill="#5c6b62" text-anchor="middle">SQL 注入拦截</text>
+  </g> <g>
+    <rect x="312" y="322" width="186.79999999999998" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
+    <text x="405.4" y="339" font-size="13" fill="#5c6b62" text-anchor="middle">Recall@3 100%</text>
+  </g> <g>
+    <rect x="462" y="322" width="146" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
+    <text x="535" y="339" font-size="13" fill="#5c6b62" text-anchor="middle">PII 泄露 = 0</text>
+  </g> <g>
+    <rect x="600" y="322" width="186.79999999999998" height="24" rx="12" fill="#f4eddc" stroke="#c9c2b2"/>
+    <text x="693.4" y="339" font-size="13" fill="#5c6b62" text-anchor="middle">缓存 43ms→1.3ms</text>
+  </g>
+  <text x="48" y="374" font-size="12.5" fill="#5c6b62" text-anchor="start" font-weight="400">算账交给确定性代码，溯源交给混合检索，外发 API 经过零信任脱敏网关</text>
+
+  <text x="30" y="442" font-size="13" fill="#22322c" text-anchor="start" font-weight="400">提供浏览器即点即用的离线仿真工作台，亦支持填入个人 API Key 切换实时流式推理</text>
+  
+  </g>
+  <text x="24" y="528" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#8a968e" letter-spacing="0.08em">AuditPilot · 确定性算账 + 混合溯源 + 零泄露网关</text>
+</svg>

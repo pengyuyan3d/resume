@@ -192,8 +192,95 @@ const orderlab = frame(
   "订单可靠性实验 · 故障注入",
 );
 
+/* ---------- 5. AuditPilot 智能审计工作台 ---------- */
+const auditpilot = frame(
+  `
+  ${box(30, 52, 180, 76, "财务流水 / 账套", "L1 确定性算子筛查")}
+  ${box(30, 148, 180, 76, "采购合同 PDF", "BM25 + Dense RRF")}
+  ${box(270, 52, 230, 76, "SQLite 只读沙箱", "Authorizer 底层防注入")}
+  ${box(270, 148, 230, 76, "条款级溯源核验", "精确到合同号 · 条款号")}
+  ${box(560, 96, 290, 92, "归一化脱敏网关 + LangGraph", "多格式账号一致占位 · 流式还原\n主备模型降级 · TTL 缓存加速", { accent: true })}
+
+  ${arrow(210, 90, 270, 90)}
+  ${arrow(210, 186, 270, 186)}
+  ${arrow(500, 90, 560, 128)}
+  ${arrow(500, 186, 560, 158)}
+
+  <rect x="30" y="274" width="820" height="118" rx="3" fill="${CARD}" stroke="${LINE}"/>
+  ${text(48, 304, "自动化评测基准：12 / 12 用例 100% 通过", { size: 15, color: INK, weight: 600 })}
+  ${chip(48, 322, "拆分付款检出")} ${chip(178, 322, "SQL 注入拦截")} ${chip(312, 322, "Recall@3 100%")} ${chip(462, 322, "PII 泄露 = 0")} ${chip(600, 322, "缓存 43ms→1.3ms")}
+  ${text(48, 374, "算账交给确定性代码，溯源交给混合检索，外发 API 经过零信任脱敏网关", { size: 12.5 })}
+
+  ${text(30, 442, "提供浏览器即点即用的离线仿真工作台，亦支持填入个人 API Key 切换实时流式推理", { size: 13, color: INK })}
+  `,
+  "AuditPilot · 确定性算账 + 混合溯源 + 零泄露网关",
+);
+
+/* ---------- 6. 长版简历晴天灯塔海岛插画卡 (640x640) ---------- */
+const islandCard = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640" role="img" aria-label="雨岛 · 产品型全栈工程手绘海图">
+  <defs>
+    <linearGradient id="c-sky" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0" stop-color="#f2faf6"/>
+      <stop offset="55%" stop-color="#c2efe8"/>
+      <stop offset="100%" stop-color="#78d2ce"/>
+    </linearGradient>
+    <linearGradient id="c-sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8e7bb"/>
+      <stop offset="100%" stop-color="#e5cb92"/>
+    </linearGradient>
+    <linearGradient id="c-grass" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0" stop-color="#c7d99b"/>
+      <stop offset="100%" stop-color="#a5c079"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="640" fill="url(#c-sky)"/>
+  <circle cx="512" cy="112" r="56" fill="#ffe7a8" opacity=".55"/>
+  <ellipse cx="320" cy="410" rx="268" ry="136" fill="#eafaf3" opacity=".75"/>
+  <ellipse cx="320" cy="404" rx="242" ry="118" fill="none" stroke="#ffffff" stroke-width="3" opacity=".85"/>
+  <ellipse cx="320" cy="400" rx="234" ry="112" fill="url(#c-sand)"/>
+  <ellipse cx="320" cy="392" rx="198" ry="92" fill="url(#c-grass)" stroke="#8fb067" stroke-width="1.6"/>
+  <ellipse cx="320" cy="388" rx="142" ry="64" fill="none" stroke="#7d9a52" stroke-opacity=".25"/>
+  <!-- 灯塔 -->
+  <g transform="translate(246 346)">
+    <ellipse cx="0" cy="10" rx="34" ry="11" fill="#a9814f" opacity=".24"/>
+    <path d="M-20 0 L-13 -126 L13 -126 L20 0 Z" fill="#fbf4e4"/>
+    <path d="M-18 -32 L-15 -92 L15 -92 L18 -32 Z" fill="#e05a3a"/>
+    <rect x="-17" y="-134" width="34" height="10" rx="2" fill="#3a4c54"/>
+    <circle cx="0" cy="-129" r="7" fill="#ffd479"/>
+    <path d="M-19 -134 L0 -158 L19 -134 Z" fill="#e05a3a"/>
+    <path d="M0 -129 L-68 -156 L-68 -114 Z" fill="#ffe7a8" opacity=".28"/>
+    <path d="M0 -129 L68 -156 L68 -114 Z" fill="#ffe7a8" opacity=".28"/>
+  </g>
+  <!-- 工坊小屋 -->
+  <g transform="translate(396 396)">
+    <ellipse cx="0" cy="24" rx="54" ry="17" fill="#a9814f" opacity=".22"/>
+    <polygon points="-42,4 0,24 0,-12 -42,-32" fill="#e0cba4"/>
+    <polygon points="42,4 0,24 0,-12 42,-32" fill="#f7edd9"/>
+    <polygon points="-44,-32 0,-56 0,-12" fill="#c25b3d"/>
+    <polygon points="44,-32 0,-56 0,-12" fill="#d9704f"/>
+    <rect x="18" y="-58" width="11" height="32" rx="1" fill="#e6ece2"/>
+    <circle cx="-18" cy="-8" r="5" fill="#ffd479"/>
+  </g>
+  <!-- 树木与小帆船 -->
+  <g transform="translate(178 392)"><rect x="-2.5" y="-14" width="5" height="16" fill="#a87c4f"/><circle cx="0" cy="-24" r="16" fill="#7fb35f"/><circle cx="-5" cy="-29" r="9" fill="#9cc97c"/></g>
+  <g transform="translate(324 432)"><rect x="-2" y="-12" width="4" height="14" fill="#a87c4f"/><circle cx="0" cy="-20" r="13" fill="#78ab58"/><circle cx="-4" cy="-24" r="7" fill="#9cc97c"/></g>
+  <g transform="translate(148 498)">
+    <ellipse cx="0" cy="7" rx="30" ry="7" fill="#2f9c9b" opacity=".2"/>
+    <path d="M-28 -2 Q0 14 28 -2 Z" fill="#c9a670"/>
+    <path d="M0 -4 L0 -36" stroke="#a87c4f" stroke-width="2.4"/>
+    <path d="M0 -34 L21 -7 L0 -7 Z" fill="#fff6e3"/>
+  </g>
+  <!-- 底部海图铭牌 -->
+  <rect x="24" y="564" width="592" height="52" rx="3" fill="#fffdf7" fill-opacity=".92" stroke="#22322c" stroke-opacity=".15"/>
+  <text x="44" y="595" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600" fill="#22322c">张雨 · 雨岛工作站</text>
+  <text x="596" y="595" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#5c6b62">PYTHON · GO · TS · FLUTTER · 3D</text>
+</svg>
+`;
+
 writeFileSync(resolve(OUT, "cip-diagram.svg"), cip, "utf8");
 writeFileSync(resolve(OUT, "daguan-diagram.svg"), daguan, "utf8");
 writeFileSync(resolve(OUT, "feihe-diagram.svg"), feihe, "utf8");
 writeFileSync(resolve(OUT, "orderlab-diagram.svg"), orderlab, "utf8");
-console.log("wrote 4 diagrams to", OUT);
+writeFileSync(resolve(OUT, "auditpilot-diagram.svg"), auditpilot, "utf8");
+writeFileSync(resolve(OUT, "island-card.svg"), islandCard, "utf8");
+console.log("wrote 6 diagrams to", OUT);

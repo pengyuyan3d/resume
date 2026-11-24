@@ -3,98 +3,163 @@ import { siteConfig } from "../../config";
 import { works } from "../../portfolio";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const [main, ...others] = works;
-const summaries = [
-  "企业 AI 工作台、身份权限与运营服务",
-  "飞鹤 KOS · AI 内容生成与运营系统",
-  "节点图玩法开发，《暴走拖拉机》地图",
+const flagships = works.filter((w) => w.tier === "flagship");
+const enterprises = works.filter((w) => w.tier === "enterprise");
+const minis = works.filter((w) => w.tier === "mini");
+
+const expHighlights = [
+  "CIP 企业 AI 工作台（FastAPI + Flutter） · 大观跨服务授权（Go IAM） · 飞鹤 KOS 内容系统（Vue 3 + K8s）",
+  "《暴走拖拉机》核心玩法与可复用行为模块构建，周活 2000+，获评平台 A 级标杆作品",
 ];
-const kinds: Record<string, string> = {
-  "3D 内容工厂": "独立作品",
-  "CIP / Leadeep 企业 AI 工作台": "企业项目",
-  "大观 · 身份权限与运营服务": "企业项目",
-  "飞鹤 KOS · AI 内容生成与运营": "企业项目",
-  "订单可靠性实验": "学习项目",
-  "3D 课本插图": "独立作品",
-  "喵伴 MiaoBan": "独立作品",
-};
 ---
 
 <section class="section" id="works">
   <div class="section-head">
     <div>
-      <p class="eyebrow">作品索引</p>
-      <h2 class="section-title">不想点地图的话，这里是文字版</h2>
+      <p class="eyebrow">主力代表作与生产交付</p>
+      <h2 class="section-title">先看能直接点开试玩的，再看生产环境踩过的边界</h2>
     </div>
-    <p style="max-width:34ch;font-size:13.5px;line-height:1.8;color:var(--paper-dim, #9aa89f);margin:0">
-      内容与图上一致。每个作品都按「问题 → 做法 → 结果」写，能点开的都给了链接。
-    </p>
+    <div class="filter-bar" role="tablist" aria-label="作品方向筛选">
+      <button class="filter-chip is-active" type="button" data-filter="all" role="tab" aria-selected="true">
+        全部 ({works.length})
+      </button>
+      <button class="filter-chip" type="button" data-filter="ai" role="tab" aria-selected="false">
+        AI 与后端工程 ({works.filter((w) => w.category === "ai").length})
+      </button>
+      <button class="filter-chip" type="button" data-filter="3d" role="tab" aria-selected="false">
+        3D 与交互产品 ({works.filter((w) => w.category === "3d").length})
+      </button>
+    </div>
   </div>
 
-  <div class="index-grid">
-    <article class="work-card is-wide">
-      <div class="wide-inner">
-        <div style="display:flex;flex-direction:column;gap:12px;height:100%">
-          <span class="wno">{kinds[main.name] ?? ""}</span>
-          <h3>{main.name}</h3>
-          <p>{main.line}</p>
-          <div class="tags">
-            {main.tags.map((t) => <span class="tag">{t}</span>)}
-          </div>
-          <div class="links" style="margin-top:auto">
-            {
-              main.links?.map((l) => (
-                <a class="link" href={l.href} target="_blank" rel="noopener noreferrer">
-                  {l.label}
-                </a>
-              ))
-            }
-          </div>
-        </div>
-        <div class="shots-2">
-          <a class="shot" href={main.links?.[0]?.href} target="_blank" rel="noopener noreferrer">
-            <img src={`${base}/shots/manual3d.webp`} alt="3D 装配说明书 Demo" loading="lazy" width="880" height="550" />
-          </a>
-          <a class="shot" href={main.links?.[1]?.href} target="_blank" rel="noopener noreferrer">
-            <img src={`${base}/shots/space3d.webp`} alt="360 全景看店 Demo" loading="lazy" width="880" height="550" />
-          </a>
-        </div>
-      </div>
-    </article>
-
+  <!-- 第一层：双王牌独立全栈代表作 -->
+  <div class="flagship-grid">
     {
-      others.map((w) => (
-        <article class="work-card">
-          {w.cover && (
-            <div class="card-cover">
-              <img src={`${base}/${w.cover.src}`} alt={w.cover.alt} loading="lazy" width="880" height="550" />
+      flagships.map((w) => (
+        <article class="work-card is-flagship" data-cat={w.category}>
+          {w.secondaryShots ? (
+            <div class="shots-2 flagship-shots">
+              {w.secondaryShots.map((s) => (
+                <a class="shot" href={s.href} target="_blank" rel="noopener noreferrer">
+                  <img src={`${base}/${s.src}`} alt={s.alt} loading="lazy" width="880" height="550" />
+                </a>
+              ))}
             </div>
+          ) : (
+            w.cover && (
+              <div class="card-cover">
+                <a href={w.links?.[0]?.href} target="_blank" rel="noopener noreferrer">
+                  <img src={`${base}/${w.cover.src}`} alt={w.cover.alt} loading="lazy" width="880" height="550" />
+                </a>
+              </div>
+            )
           )}
-          <span class="wno">{kinds[w.name] ?? ""}</span>
+          <span class="wno">{w.role}</span>
           <h3>{w.name}</h3>
           <p>{w.line}</p>
           <div class="tags">
-            {w.tags.slice(0, 4).map((t) => <span class="tag">{t}</span>)}
+            {w.tags.map((t) => <span class="tag">{t}</span>)}
           </div>
           <div class="row">
-            <span style="font-size:12px;color:var(--paper-faint, #6d7a72)">{w.period ?? w.role ?? ""}</span>
-            <button class="link" type="button" data-zone="build" style="background:none;border:0;border-bottom:1px solid rgba(224,138,112,.35);padding:0 0 1px;cursor:pointer">
-              看问题与做法
+            <div class="links" style="margin-top:0">
+              {w.links?.map((l) => (
+                <a
+                  class={l.primary ? "btn btn-primary btn-xs" : "link"}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </div>
+            <button class="link btn-as-link" type="button" data-zone="build" data-case={w.slug}>
+              问题与做法 →
             </button>
           </div>
         </article>
       ))
     }
   </div>
+
+  <!-- 第二层：三段企业生产级交付 -->
+  <div class="sub-block" data-subblock="enterprise">
+    <div class="sub-head">
+      <h3>企业生产级交付（北京衔远科技）</h3>
+      <span>内网系统无公网入口，点击「问题与做法」查看架构边界与故障恢复复盘</span>
+    </div>
+    <div class="index-grid">
+      {
+        enterprises.map((w) => (
+          <article class="work-card" data-cat={w.category}>
+            {w.cover && (
+              <div class="card-cover">
+                <img src={`${base}/${w.cover.src}`} alt={w.cover.alt} loading="lazy" width="880" height="550" />
+              </div>
+            )}
+            <span class="wno">{w.role}</span>
+            <h3>{w.name}</h3>
+            <p>{w.line}</p>
+            {w.beforeAfter && (
+              <p class="ba-inline">
+                <strong>收敛结果：</strong>{w.beforeAfter.after.replace(/^改动后：/, "")}
+              </p>
+            )}
+            <div class="tags">
+              {w.tags.slice(0, 4).map((t) => <span class="tag">{t}</span>)}
+            </div>
+            <div class="row">
+              <span class="muted-note">生产交付复盘</span>
+              <button class="link btn-as-link" type="button" data-zone="build" data-case={w.slug}>
+                看问题与做法 →
+              </button>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- 第三层：造物与实验小品（次级紧凑区，不抢主线） -->
+  <div class="sub-block" data-subblock="mini">
+    <div class="sub-head">
+      <h3>造物与工程实验小品</h3>
+      <span>单文件离线教具、50KB 原生桌宠、零素材小游戏与队列故障演练</span>
+    </div>
+    <div class="mini-grid">
+      {
+        minis.map((w) => (
+          <article class="mini-card" data-cat={w.category}>
+            <span class="wno">{w.role}</span>
+            <h4>{w.name}</h4>
+            <p>{w.line}</p>
+            <div class="tags" style="margin-top:auto;padding-top:6px">
+              {w.tags.map((t) => <span class="tag">{t}</span>)}
+            </div>
+            <div class="row" style="margin-top:8px">
+              {w.links?.[0] && (
+                <a class="link" href={w.links[0].href} target="_blank" rel="noopener noreferrer">
+                  {w.links[0].label}
+                </a>
+              )}
+              <button class="link btn-as-link" type="button" data-zone="build" data-case={w.slug}>
+                详情 →
+              </button>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
 </section>
 
 <section class="section" id="experience" style="padding-top:0">
   <div class="section-head">
     <div>
-      <p class="eyebrow">经历</p>
-      <h2 class="section-title">三段经历，一条主线：把 AI 落成能用的产品</h2>
+      <p class="eyebrow">研发经历</p>
+      <h2 class="section-title">端到端把需求落成可靠上线的产品</h2>
     </div>
-    <button class="btn" type="button" data-zone="work">看完整经历</button>
+    <button class="btn" type="button" data-zone="work">展开全部交付细节</button>
   </div>
 
   <div style="display:grid;gap:0">
@@ -102,12 +167,10 @@ const kinds: Record<string, string> = {
       siteConfig.experience.map((job, i) => (
         <button type="button" class="exp-row" data-zone="work">
           <span>
-            <span class="exp-co">{job.company}</span>
-            <span class="exp-meta">
-              {job.title} · {summaries[i] ?? ""}
-            </span>
+            <span class="exp-co">{job.company} · {job.title}</span>
+            <span class="exp-meta">{expHighlights[i] ?? ""}</span>
           </span>
-          <span class="exp-time">{job.dateRange}</span>
+          <span class="exp-cta">查看详情 →</span>
         </button>
       ))
     }

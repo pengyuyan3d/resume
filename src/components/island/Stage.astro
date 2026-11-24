@@ -1,6 +1,7 @@
 ﻿---
 import { siteConfig } from "../../config";
 import { zones } from "../../portfolio";
+import islandSvg from "../../../public/island.svg?raw";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
@@ -8,29 +9,32 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 <section class="stage" id="island">
   <div class="stage-inner">
     <div class="stage-copy">
+      <p class="stage-kicker">{siteConfig.name} · 产品型全栈开发工程师</p>
       <h1 class="stage-title">雨岛</h1>
 
-      <p class="stage-lede">四座基点，放我做过的项目。</p>
+      <p class="stage-lede">从后端容错到客户端与 3D 交互，一人闭环跑通上线。</p>
       <p class="stage-desc">
-        2026 届，在北京找 AI 应用 / Python 后端的工作，随时到岗。
-        点开地图上的名字，看每个项目的问题、做法和结果。
+        Python / FastAPI · Go · Vue 3 / React · Flutter · Three.js 与企业级 LLM 工程化落地。
+        点开海图建筑或下方卡片，查看每个项目的真实问题、做法与可核验结果。
       </p>
 
+      <ul class="stage-proofs" aria-label="核心背景速览">
+        <li>国家奖学金 · 专业 Top 5%</li>
+        <li>省数学竞赛一等奖</li>
+        <li>企业级 AI 全栈交付</li>
+        <li>2026 届 · 北京随时到岗</li>
+      </ul>
+
       <div class="stage-actions">
-        <button class="btn btn-primary" type="button" data-zone="work">打开工作港</button>
-        <a class="btn btn-ghost" href={`${base}/resume.pdf`} download>下载简历 PDF</a>
+        <a class="btn btn-primary" href="#works">体验线上代表作</a>
+        <button class="btn btn-ghost" type="button" data-zone="work">企业交付经历</button>
+        <a class="btn btn-ghost" href={`${base}/resume.pdf`} download>下载一页 PDF</a>
       </div>
     </div>
 
     <figure class="plate">
       <div class="plate-frame">
-        <img
-          src={`${base}/island.svg`}
-          width="1200"
-          height="780"
-          alt="雨岛地图：工作港、项目工坊、校园灯塔、内容营地四座基点"
-          fetchpriority="high"
-        />
+        <div class="island-svg" set:html={islandSvg} />
         {
           zones.map((z) => (
             <button
@@ -43,13 +47,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
               aria-expanded="false"
             >
               <span class="marker-dot" aria-hidden="true"><i>{z.name}</i></span>
-              <span class="marker-label">{z.name}</span>
+              <span class="marker-label">
+                <span class="marker-title">{z.name}</span>
+                <span class="marker-sub">{z.hoverHint}</span>
+              </span>
             </button>
           ))
         }
       </div>
       <figcaption class="plate-caption">
-        <span>雨岛 · 四座基点</span>
+        <span>雨岛 · 点击建筑或路标直达抽屉（支持数字键 1–4）</span>
         <span>39.9°N 116.4°E</span>
       </figcaption>
     </figure>
@@ -64,6 +71,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
         </button>
       ))
     }
-    <a class="index-cta" href={`${base}/resume.pdf`} download>下载简历 PDF</a>
+    <a class="index-cta" href={`${base}/resume.pdf`} download>下载一页 PDF</a>
   </nav>
 </section>

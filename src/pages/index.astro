@@ -7,9 +7,9 @@ import "../styles/global.css";
 import "../styles/island.css";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const title = `${siteConfig.name} · 雨岛 | 作品集`;
+const title = `${siteConfig.name} · 产品型全栈开发 | 雨岛作品集`;
 const desc =
-  "张雨的作品集：一座可以点开的岛。三段企业 AI 交付、七个作品、校园与联系方式，每个项目按「问题 → 做法 → 结果」写清楚。";
+  "张雨的作品集与简历：产品型全栈开发工程师（国家奖学金 / Top 5%）。双王牌可交互全栈代表作、三段企业级 AI 交付与在线一页简历。";
 ---
 
 <html lang="zh-CN">
@@ -20,7 +20,7 @@ const desc =
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={desc} />
-    <meta name="theme-color" content="#05070a" />
+    <meta name="theme-color" content="#faf4e6" />
     <meta property="og:type" content="profile" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={desc} />
@@ -28,19 +28,18 @@ const desc =
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preload" as="image" href={`${base}/island.svg`} />
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Person",
         name: siteConfig.name,
-        jobTitle: "全栈开发工程师（AI 应用方向）",
+        jobTitle: siteConfig.title,
         email: `mailto:${siteConfig.social.email}`,
         telephone: siteConfig.phone,
-        url: "https://pengyuyan3d.github.io/resume/",
+        url: siteConfig.portfolioUrl,
         address: { "@type": "PostalAddress", addressLocality: "北京", addressCountry: "CN" },
-        sameAs: ["https://github.com/pengyuyan3d"],
+        sameAs: [siteConfig.social.github],
         alumniOf: { "@type": "CollegeOrUniversity", name: "福建理工大学" },
       })}
     />
@@ -52,15 +51,15 @@ const desc =
       <div class="mx-auto flex h-16 max-w-[1560px] items-center justify-between px-6 md:px-10">
         <a href={`${base}/`} class="flex items-baseline gap-2.5">
           <span class="text-[22px]" style="font-family:'Smiley Sans', var(--font-sans)">张雨</span>
-          <span class="text-[12px] text-[rgba(34,50,44,0.45)]">作品集</span>
+          <span class="text-[12px] text-[rgba(34,50,44,0.5)]">产品型全栈 · 作品集</span>
         </a>
         <nav class="hidden items-center gap-8 text-[13px] text-[rgba(34,50,44,0.62)] md:flex">
-          <a class="nav-link hover:text-[#22322c]" href="#works">作品索引</a>
-          <a class="nav-link hover:text-[#22322c]" href="#experience">经历</a>
+          <a class="nav-link hover:text-[#22322c]" href="#works">代表作</a>
+          <a class="nav-link hover:text-[#22322c]" href="#experience">研发经历</a>
           <a class="nav-link hover:text-[#22322c]" href={`${base}/profile/`}>长版简历</a>
         </nav>
         <a class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px;border-radius:2px" href={`${base}/resume.pdf`} download>
-          简历 PDF
+          一页简历 PDF
         </a>
       </div>
     </header>
@@ -75,12 +74,12 @@ const desc =
           style="padding:clamp(26px,4vw,44px);display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:4px"
         >
           <div>
-            <p class="eyebrow">联系</p>
+            <p class="eyebrow">联系与简历</p>
             <h2 style="font-family:'Smiley Sans',var(--font-sans);font-size:clamp(24px,2.8vw,34px);font-weight:400;margin:10px 0 10px;letter-spacing:.01em">
-              在看机会，随时可以聊
+              随时到岗北京，欢迎约面交流
             </h2>
-            <p style="font-size:13.5px;line-height:1.8;color:rgba(34,50,44,.62);margin:0">
-              北京，2026 届，方向是 AI 应用 / Python 后端 / 全栈
+            <p style="font-size:13.5px;line-height:1.8;color:rgba(34,50,44,.65);margin:0">
+              2026 届 · 国家奖学金（专业 Top 5%） · 主攻产品型全栈开发 / 企业级 AI 应用 / Python·Go 后端
             </p>
           </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -88,6 +87,7 @@ const desc =
             <button class="btn" type="button" data-copy={siteConfig.social.email}>
               复制邮箱
             </button>
+            <a class="btn" href={`${base}/resume.pdf`} download>下载一页 PDF</a>
             <a class="btn" href="https://github.com/pengyuyan3d" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </div>
@@ -95,10 +95,10 @@ const desc =
     </main>
 
     <footer class="site-footer">
-      <span>© 2026 张雨 · 手绘海图 + Astro，无前端框架运行时</span>
+      <span>© 2026 张雨 · 内联手绘活海图 + Astro 静态构建，零前端框架运行时</span>
       <span style="display:flex;gap:16px">
-        <a href="https://github.com/pengyuyan3d/resume" target="_blank" rel="noopener noreferrer" class="hover:text-text">源码</a>
-        <a href={`${base}/resume/`} class="hover:text-text">打印版</a>
+        <a href="https://github.com/pengyuyan3d/resume" target="_blank" rel="noopener noreferrer" class="hover:text-[#22322c]">本站源码</a>
+        <a href={`${base}/resume/`} class="hover:text-[#22322c]">A4 打印版</a>
       </span>
     </footer>
 
@@ -109,25 +109,53 @@ const desc =
       const body = document.body;
       const panels = [...document.querySelectorAll<HTMLElement>(".panel")];
       const triggers = [...document.querySelectorAll<HTMLElement>("[data-zone]")];
-      const scrim = document.querySelector<HTMLElement>(".scrim");
+      const mapBldgs = [...document.querySelectorAll<SVGGElement>(".map-bldg")];
+      const markers = [...document.querySelectorAll<HTMLElement>(".marker")];
       const order = ["work", "build", "campus", "camp"];
       let lastFocus: HTMLElement | null = null;
 
       const panelOf = (id: string) => panels.find((p) => p.dataset.panel === id) || null;
 
-      function openPanel(id: string, push = true) {
+      function scrollToCase(panel: HTMLElement, caseSlug?: string | null) {
+        const bodyEl = panel.querySelector<HTMLElement>(".panel-body");
+        if (!bodyEl) return;
+        if (!caseSlug) {
+          bodyEl.scrollTop = 0;
+          return;
+        }
+        const target = panel.querySelector<HTMLElement>(`#case-${caseSlug}`);
+        if (target) {
+          window.setTimeout(() => {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            target.classList.remove("is-flash");
+            void target.offsetWidth;
+            target.classList.add("is-flash");
+          }, 80);
+        } else {
+          bodyEl.scrollTop = 0;
+        }
+      }
+
+      function openPanel(id: string, caseSlug?: string | null, push = true) {
         const panel = panelOf(id);
         if (!panel) return;
-        lastFocus = document.activeElement as HTMLElement | null;
+        if (!body.classList.contains("has-panel")) {
+          lastFocus = document.activeElement as HTMLElement | null;
+        }
         panels.forEach((p) => p.classList.toggle("is-open", p === panel));
         body.classList.add("has-panel");
-        triggers.forEach((t) => t.setAttribute("aria-expanded", String(t.dataset.zone === id)));
-        const bodyEl = panel.querySelector<HTMLElement>(".panel-body");
-        if (bodyEl) bodyEl.scrollTop = 0;
+        triggers.forEach((t) => {
+          if (t.hasAttribute("aria-expanded")) {
+            t.setAttribute("aria-expanded", String(t.dataset.zone === id));
+          }
+        });
+        scrollToCase(panel, caseSlug);
         window.setTimeout(() => panel.focus({ preventScroll: true }), 60);
         if (push) {
           const url = new URL(window.location.href);
           url.searchParams.set("zone", id);
+          if (caseSlug) url.searchParams.set("case", caseSlug);
+          else url.searchParams.delete("case");
           history.replaceState(null, "", url);
         }
       }
@@ -137,16 +165,50 @@ const desc =
         if (!open) return;
         open.classList.remove("is-open");
         body.classList.remove("has-panel");
-        triggers.forEach((t) => t.setAttribute("aria-expanded", "false"));
+        triggers.forEach((t) => {
+          if (t.hasAttribute("aria-expanded")) t.setAttribute("aria-expanded", "false");
+        });
         const url = new URL(window.location.href);
         url.searchParams.delete("zone");
+        url.searchParams.delete("case");
         history.replaceState(null, "", url);
         lastFocus?.focus({ preventScroll: true });
       }
 
       triggers.forEach((t) => {
-        t.addEventListener("click", () => openPanel(t.dataset.zone as string));
+        t.addEventListener("click", () => {
+          const zoneId = t.dataset.zone as string;
+          const caseSlug = t.dataset.case || null;
+          openPanel(zoneId, caseSlug);
+        });
+        // 海图建筑与路标、底栏双向联动高亮
+        const z = t.dataset.zone;
+        if (z && !t.classList.contains("panel-tab")) {
+          t.addEventListener("mouseenter", () => {
+            mapBldgs.forEach((b) => b.classList.toggle("is-active", b.dataset.zone === z));
+            markers.forEach((m) => m.classList.toggle("is-linked", m.dataset.zone === z));
+          });
+          t.addEventListener("mouseleave", () => {
+            mapBldgs.forEach((b) => b.classList.remove("is-active"));
+            markers.forEach((m) => m.classList.remove("is-linked"));
+          });
+        }
       });
+
+      // 抽屉内项目锚点胶囊点击跳转
+      document.querySelectorAll<HTMLElement>("[data-jump]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.jump;
+          const target = id ? document.getElementById(id) : null;
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            target.classList.remove("is-flash");
+            void target.offsetWidth;
+            target.classList.add("is-flash");
+          }
+        });
+      });
+
       document.querySelectorAll("[data-close-panel]").forEach((el) => {
         el.addEventListener("click", closePanel);
       });
@@ -157,6 +219,14 @@ const desc =
           ev.preventDefault();
           closePanel();
           return;
+        }
+        if (isOpen && (ev.key === "ArrowLeft" || ev.key === "ArrowRight")) {
+          const cur = panels.findIndex((p) => p.classList.contains("is-open"));
+          if (cur >= 0) {
+            const next = (cur + (ev.key === "ArrowRight" ? 1 : -1) + order.length) % order.length;
+            openPanel(order[next]);
+            return;
+          }
         }
         if (isOpen && ev.key === "Tab") {
           const panel = panels.find((p) => p.classList.contains("is-open"));
@@ -183,15 +253,59 @@ const desc =
         if (idx >= 1 && idx <= 4) openPanel(order[idx - 1]);
       });
 
+      // 分类筛选器
+      const filterChips = [...document.querySelectorAll<HTMLElement>("[data-filter]")];
+      const catCards = [...document.querySelectorAll<HTMLElement>("[data-cat]")];
+      const subBlocks = [...document.querySelectorAll<HTMLElement>("[data-subblock]")];
+      filterChips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const f = chip.dataset.filter || "all";
+          filterChips.forEach((c) => {
+            const active = c === chip;
+            c.classList.toggle("is-active", active);
+            c.setAttribute("aria-selected", String(active));
+          });
+          catCards.forEach((card) => {
+            const show = f === "all" || card.dataset.cat === f;
+            card.style.display = show ? "" : "none";
+          });
+          subBlocks.forEach((block) => {
+            const visibleInBlock = [...block.querySelectorAll<HTMLElement>("[data-cat]")].some(
+              (c) => c.style.display !== "none",
+            );
+            block.style.display = visibleInBlock ? "" : "none";
+          });
+        });
+      });
+
+      // 图片放大灯箱
+      const lightbox = document.getElementById("img-lightbox") as HTMLDialogElement | null;
+      const lbImg = document.getElementById("lightbox-img") as HTMLImageElement | null;
+      document.querySelectorAll<HTMLElement>("[data-zoom-src]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (!lightbox || !lbImg) return;
+          lbImg.src = btn.dataset.zoomSrc || "";
+          lbImg.alt = btn.dataset.zoomAlt || "";
+          lbImg.hidden = false;
+          lightbox.showModal();
+        });
+      });
+      document.getElementById("lightbox-close")?.addEventListener("click", () => lightbox?.close());
+      lightbox?.addEventListener("click", (e) => {
+        if (e.target === lightbox) lightbox.close();
+      });
+
       // 顶栏滚动变实
       const header = document.getElementById("header");
       const onScroll = () => header?.classList.toggle("is-solid", window.scrollY > 16);
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
 
-      // 深链：?zone=build
-      const zone = new URLSearchParams(window.location.search).get("zone");
-      if (zone && order.includes(zone)) openPanel(zone, false);
+      // 深链：?zone=build&case=audit-pilot
+      const params = new URLSearchParams(window.location.search);
+      const zone = params.get("zone");
+      const caseParam = params.get("case");
+      if (zone && order.includes(zone)) openPanel(zone, caseParam, false);
 
       // 复制邮箱
       const toast = document.getElementById("toast");
@@ -217,24 +331,6 @@ const desc =
           }
         });
       });
-
-      // 入场
-      const revealEls = document.querySelectorAll(".reveal");
-      if ("IntersectionObserver" in window) {
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              entry.target.classList.add("in");
-              io.unobserve(entry.target);
-            });
-          },
-          { threshold: 0.1, rootMargin: "0px 0px -6% 0px" },
-        );
-        revealEls.forEach((el) => io.observe(el));
-      } else {
-        revealEls.forEach((el) => el.classList.add("in"));
-      }
     </script>
   </body>
 </html>
