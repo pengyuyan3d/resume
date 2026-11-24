@@ -67,22 +67,38 @@ const desc =
       <IndexSection />
 
       <section class="section" id="contact" style="padding-top:0">
-        <div class="cta-banner">
-          <div>
-            <p class="eyebrow">开放机会 · 北京</p>
-            <h2 class="cta-title">随时到岗，期待一起把好点子做成上线产品</h2>
-            <p class="cta-desc">
-              2026 届本科 · 国家奖学金（专业 Top 5%） · 产品型全栈开发 / 企业级 AI 应用 / Python·Go 后端
+        <div class="about-cta-bento">
+          <div class="about-cta-copy">
+            <p class="eyebrow">关于与联系 · 北京</p>
+            <h2 class="cta-title">写代码追求确定性，上雪道享受掌控感</h2>
+            <p class="cta-story">
+              平时写系统习惯把断线重连、幂等回执和异常降级一条条算清楚；周末喜欢去雪场滑单板——其实把一条陡道滑顺，和把一条复杂全栈链路调稳是一回事：<strong>看清地形边界、留好容错余量，然后干净利落地滑到底。</strong>
             </p>
+            <p class="cta-desc">
+              2026 届本科 · 国家奖学金（专业 Top 5%） · 北京随时到岗，期待一起把好点子做成上线产品。
+            </p>
+            <div class="cta-actions">
+              <a class="btn btn-primary" href={`mailto:${siteConfig.social.email}`}>发送邮件</a>
+              <button class="btn btn-glass" type="button" data-copy={siteConfig.social.email}>
+                复制邮箱
+              </button>
+              <a class="btn btn-glass" href={`${base}/resume.pdf`} download>一页简历 PDF</a>
+              <a class="btn btn-glass" href="https://github.com/pengyuyan3d" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            </div>
           </div>
-          <div class="cta-actions">
-            <a class="btn btn-primary" href={`mailto:${siteConfig.social.email}`}>发送邮件</a>
-            <button class="btn btn-glass" type="button" data-copy={siteConfig.social.email}>
-              复制邮箱
+
+          <figure class="ski-polaroid">
+            <button
+              type="button"
+              class="zoom-trigger ski-frame"
+              data-zoom-src={`${base}/ski-life.webp`}
+              data-zoom-alt="张雨 · 单板滑雪生活照"
+              aria-label="放大查看滑雪生活照"
+            >
+              <img src={`${base}/ski-life.webp`} alt="张雨单板滑雪生活照" width="960" height="1280" loading="lazy" />
+              <span class="ski-caption">🏂 北京 · 代码之外在雪场</span>
             </button>
-            <a class="btn btn-glass" href={`${base}/resume.pdf`} download>一页简历 PDF</a>
-            <a class="btn btn-glass" href="https://github.com/pengyuyan3d" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          </div>
+          </figure>
         </div>
       </section>
     </main>

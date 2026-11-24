@@ -174,6 +174,11 @@ try {
       const desktopCards = await send("Page.captureScreenshot", { format: "png" });
       writeFileSync(join(scratchShots, "verify-cards.png"), Buffer.from(desktopCards.data, "base64"));
 
+      await send("Runtime.evaluate", { expression: "window.scrollTo(0, document.body.scrollHeight)" });
+      await sleep(700);
+      const desktopSki = await send("Page.captureScreenshot", { format: "png" });
+      writeFileSync(join(scratchShots, "verify-ski-bento.png"), Buffer.from(desktopSki.data, "base64"));
+
       await send("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
       await send("Page.navigate", { url: `http://127.0.0.1:${httpPort}/resume/` });
       await sleep(1000);
